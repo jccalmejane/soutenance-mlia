@@ -5,6 +5,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: "export",
   images: { unoptimized: true },
+  // notes de l'orateur incluses en local, exclues du build Vercel (VERCEL=1 pendant le build en ligne)
+  env: { NOTES_ORATEUR: process.env.VERCEL ? "0" : "1" },
 };
 
 export default nextConfig;

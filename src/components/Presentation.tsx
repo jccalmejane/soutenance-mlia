@@ -1,7 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import notes from "@/lib/notes.json";
+import notesOrateur from "@/lib/notes.json";
+
+// Notes de l'orateur : seulement dans la version locale. Sur Vercel (build en ligne), elles ne sont pas incluses
+// dans le site du tout (pas seulement masquées) — voir NOTES_ORATEUR dans next.config.ts.
+const AVEC_NOTES = process.env.NOTES_ORATEUR === "1";
+const notes: Record<string, string | string[]> = AVEC_NOTES ? notesOrateur : {};
 
 export type EcranInfo = { id: string; n: string; titre: string; note: number };
 
@@ -53,7 +58,7 @@ export default function Presentation({ ecrans }: { ecrans: EcranInfo[] }) {
       else if (["ArrowUp", "ArrowLeft", "PageUp"].includes(ev.key)) { ev.preventDefault(); aller(courant - 1); }
       else if (ev.key === "Home") { ev.preventDefault(); aller(0); }
       else if (ev.key === "End") { ev.preventDefault(); aller(ecrans.length - 1); }
-      else if (ev.key === "n" || ev.key === "N") setNotesVisibles((v) => !v);
+      else if (AVEC_NOTES && (ev.key === "n" || ev.key === "N")) setNotesVisibles((v) => !v);
       else if (ev.key === "f" || ev.key === "F") {
         if (document.fullscreenElement) document.exitFullscreen();
         else document.documentElement.requestFullscreen?.();
@@ -64,7 +69,7 @@ export default function Presentation({ ecrans }: { ecrans: EcranInfo[] }) {
   }, [aller, courant, ecrans.length]);
 
   const e = ecrans[courant];
-  const note = (notes as Record<string, string | string[]>)[String(e?.note)];
+  const note = notes[String(e?.note)];
 
   return (
     <>
@@ -96,10 +101,10 @@ export default function Presentation({ ecrans }: { ecrans: EcranInfo[] }) {
             <button onClick={() => setSommaire((v) => !v)} className="rounded-full border border-line bg-paper px-3 py-1.5 text-sm font-semibold text-navy hover:border-amber">
               Sommaire
             </button>
-            <button onClick={() => setNotesVisibles((v) => !v)} title="Notes de l'orateur (touche N)"
+            {AVEC_NOTES && <button onClick={() => setNotesVisibles((v) => !v)} title="Notes de l'orateur (touche N)"
               className={`rounded-full border px-3 py-1.5 text-sm font-semibold ${notesVisibles ? "border-amber bg-amber-soft text-amber-deep" : "border-line bg-paper text-ink-soft hover:border-amber"}`}>
               Notes
-            </button>
+            </button>}
             <a href="#demo" className="rounded-full bg-gradient-to-r from-amber-bright to-amber px-4 py-1.5 text-sm font-semibold text-navy-deep hover:brightness-105">
               Démonstrateur
             </a>
