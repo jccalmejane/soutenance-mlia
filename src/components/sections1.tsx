@@ -15,17 +15,31 @@ export function Accueil() {
           <p className="ml-auto text-sm text-ink-soft">Jean Calmejane · octobre 2026 · encadrement : Syrielle Montariol</p>
         </div>
         <h1 className="mt-2 max-w-4xl text-4xl font-bold text-navy sm:text-[2.6rem] sm:leading-tight [text-wrap:balance]">Assistant de formulation prédictive pour l&apos;alimentaire</h1>
-        <p className="mt-3 max-w-4xl text-base text-ink-soft">
+        <p className="mt-2 max-w-4xl text-base text-ink-soft">
           Un LLM écrit la liste d&apos;ingrédients à partir du brief et du cahier des charges — d&apos;un petit modèle fine-tuné à un modèle
           ouvert de 9 milliards de paramètres en RAG, comparé à ChatGPT ; une optimisation la traduit en recette de matières premières dans Crumble-AI.
         </p>
-        <h2 className="mt-5 text-xl font-bold text-navy">Le problème métier : formuler, c&apos;est arbitrer sous contraintes</h2>
+        <h2 className="mt-4 text-xl font-bold text-navy">Le problème métier : formuler, c&apos;est arbitrer sous contraintes</h2>
         <div className="mt-3 grid gap-3 md:grid-cols-3">
           <Carte num="1" titre="Une page blanche">Un brief (« madeleine aux pépites de chocolat »), un cahier des charges (« vegan »), et des itérations longues : recette, calcul, étiquette, correction.</Carte>
           <Carte num="2" titre="Des contraintes nombreuses">Coût de recette, Nutri-Score, allergènes, allégations (vegan, bio, halal), huile de palme, additifs, doses maximales.</Carte>
           <Carte num="3" titre="Le marché, base d'apprentissage">Chaque étiquette du commerce est une formulation réelle : liste d&apos;ingrédients ordonnée, pourcentages déclarés, nutrition, allégations.</Carte>
         </div>
-        <div className="mt-4">
+        {/* Ordre de grandeur (référentiel Crumble-AI) : ~16 MP équivalentes par catégorie en moyenne sur les recettes → 16^14 ≈ 10^17 ;
+            doser 14 MP au % près = compositions de 100 en 14 parts = C(99,13) ≈ 6·10^15 ; produit ≈ 10^33. */}
+        <div className="mt-3 rounded-2xl border border-line bg-paper px-4 py-3">
+          <p className="text-sm font-bold tracking-widest text-amber-deep uppercase">Ordre de grandeur : un espace de recherche faramineux</p>
+          <div className="mt-1.5 grid gap-3 sm:grid-cols-3">
+            <div><p className="text-2xl font-bold text-navy tabular-nums">≈ 50 attributs</p>
+              <p className="text-sm leading-snug text-ink-soft">par matière première : 20 nutriments, 14 allergènes (présent, traces, absent), une quinzaine d&apos;allégations, un coût</p></div>
+            <div><p className="text-2xl font-bold text-blue tabular-nums">≈ 10<sup>17</sup> combinaisons</p>
+              <p className="text-sm leading-snug text-ink-soft">~14 matières premières par produit, chacune à choisir parmi ~16 équivalentes (11 farines, 7 pépites…)</p></div>
+            <div><p className="text-2xl font-bold text-amber tabular-nums">≈ 10<sup>33</sup> recettes</p>
+              <p className="text-sm leading-snug text-ink-soft">en dosant ces 14 matières premières au % près (10<sup>16</sup> façons) — bien plus que les grains de sable de la Terre (~10<sup>19</sup>)</p></div>
+          </div>
+          <p className="mt-1.5 text-sm font-semibold text-navy">Le formulateur l&apos;explore à la main, quelques itérations à la fois : l&apos;IA propose un point de départ crédible, le calcul vérifie, l&apos;optimisation dose.</p>
+        </div>
+        <div className="mt-3">
           <Exemple titre="Une étiquette réelle, telle qu'on l'apprend">
             <b>Madeleines coquilles</b> — farine de blé, beurre 23 %, œufs 20 %, sucre, sirop de sucre inverti, sirop de glucose, poudres à lever,
             carbonates de sodium, sel de Guérande, arôme naturel.<br />
