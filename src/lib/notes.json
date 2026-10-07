@@ -1,0 +1,196 @@
+{
+ "1": [
+  "Assistant de formulation prédictive, alimentaire",
+  "Problème : page blanche — brief + cahier des charges (« vegan »)",
+  "Arbitrer : coût, Nutri-Score, allergènes, allégations",
+  "Idée : chaque étiquette = une recette réelle → 46 000 produits, 90 000 % déclarés",
+  "Un LLM écrit la liste d'ingrédients : petit modèle entraîné → 9B en RAG, face à ChatGPT",
+  "Optimisation → matières premières dans Crumble-AI",
+  "Objectif : un premier prototype ; le formulateur décide"
+ ],
+ "3": [
+  "3 temps ; chacun reste un point de comparaison",
+  "1 · Classique : voisins, puis 3 modèles supervisés (ingrédients, ordre, %)",
+  "2 · Petit LLM entraîné (LoRA) : écrit la liste, lit le cahier des charges, tourne sur mon PC",
+  "3 · ChatGPT me bat sur les contraintes → 9B ouvert en RAG : presque aussi bon",
+  "Ingrédient (étiquette) ≠ matière première (achat) → problème inverse"
+ ],
+ "4": [
+  "Exemple : madeleine aux pépites, cahier « vegan »",
+  "1 Générer : farine, colza, sucre, pépites, protéines de pois (au lieu des œufs)",
+  "2 Contrôler : ordre, somme, vegan ✓",
+  "3 Bilan d'eau : étiquette → pâte",
+  "4 Solveur : matières premières vegan uniquement",
+  "5 Crumble-AI recalcule : 2,48 €/kg, Nutri-Score E",
+  "Principe : on apprend l'incertain, on calcule l'exact"
+ ],
+ "5": [
+  "Open Food Facts : 7,9 Go, DuckDB → 49 838 produits, 90 000 QUID",
+  "Découpage par nom : aucun nom du test vu à l'apprentissage",
+  "Crumble-AI : 281 MP, 50 produits finis (coût, nutrition, allergènes)",
+  "CIQUAL : nutrition et eau des ingrédients",
+  "85 % de la catégorie en Nutri-Score D ou E",
+  "Même nom, deux recettes (madeleines coquilles : beurre / huile)"
+ ],
+ "6": [
+  "Règles INCO : ordre décroissant, QUID obligatoire, somme 100 %",
+  "Madeleines pur beurre : farine ≥ 23 %, sucre ≤ 20 % — sans aucun modèle",
+  "Bornes justes dans 96,6 % des cas",
+  "Elles vérifient le LLM : vérifier plutôt que juger, pas de LLM-juge"
+ ],
+ "7": [
+  "3 modèles : quels ingrédients, quel ordre, quelles proportions",
+  "Chacun bat sa baseline (F1 0,57 · τ 0,50 · erreur 7,1 pts)",
+  "Fort sur la liste (F1 0,49), explicable par les mots du nom",
+  "Mais ne lit pas le cahier des charges",
+  "Plafond naturel : même nom → F1 0,58 seulement"
+ ],
+ "8": [
+  "Entrée : nom, catégorie, cahier des charges",
+  "Sortie : liste ordonnée + % déclarés",
+  "Madeleines pur beurre : très proche de l'étiquette",
+  "Cahier des charges reconstruit depuis Open Food Facts (0 à 3 critères)",
+  "Piège : la vraie recette le respecte déjà → contrefactuels"
+ ],
+ "9": [
+  "Qwen2.5 0,5B + LoRA : 1,7 % des poids entraînés",
+  "On n'apprend que la réponse",
+  "< 2 h sur GPU gratuit (Colab T4)",
+  "Perte en baisse, pas de surapprentissage ; 1,5B un peu mieux",
+  "Échelle du cours : zero-shot → few-shot → RAG → LoRA"
+ ],
+ "10": [
+  "Liste : F1, ordre (τ), erreur sur les %",
+  "Vérificateurs : allergènes, vegan, palme, additifs",
+  "Ex. pain d'épices « sans lait » + beurre → ✗",
+  "Contrefactuels : 1 350 cas — critère respecté ET recette proche",
+  "Ablation + tests statistiques (McNemar)"
+ ],
+ "11": [
+  "Mini brownies noix de pécan (avec œufs) → on impose « sans œufs »",
+  "LoRA : retire les œufs, huile + émulsifiant, garde chocolat et pécan → réussi",
+  "Sans cahier, chaîne supervisée, zero-shot : gardent des œufs → échec",
+  "F1 ≥ 0,4 exigé : sinon une réponse absurde « réussirait »"
+ ],
+ "12": [
+  "10 000 produits jamais vus",
+  "Sans entraînement : invente 1 ingrédient sur 4",
+  "Avec voisins (RAG) : nettement mieux",
+  "LoRA : 0,7 % d'inventions, format 99 %, contrefactuels 0,18 → 0,33 → 0,37 (augmenté)",
+  "Chaîne supervisée : +6 pts de F1, mais ignore le cahier",
+  "Madeleines : 0,35 → 0,70"
+ ],
+ "13": [
+  "Par produit : 5 justes, 7 en trop, 7 manqués — bonne longueur",
+  "15 % des erreurs = même ingrédient, autre forme (beurre concentré) → F1 0,42 → 0,51",
+  "Vraies erreurs : fin de liste, additifs (30 %), matière grasse = choix de marque",
+  "Pistes : regrouper les formes, augmentation ciblée (faite), critère matière grasse"
+ ],
+ "14": [
+  "Même modèle, entraîné sans cahier des charges",
+  "Liste aussi bonne (0,42 / 0,43)",
+  "Contrefactuels : 0,23 → 0,33 avec cahier (p ≈ 10⁻¹⁵)",
+  "Gains : œufs, lait, additifs, palme",
+  "Brownies : sans cahier, garde le blanc d'œuf",
+  "Vegan raté → corrigé par l'augmentation (écran 16)"
+ ],
+ "15": [
+  "0,5B → 1,5B : gain réel mais faible",
+  "Limite : l'information du nom (plafond 0,58)",
+  "ChatGPT : 0,51 de contrefactuels contre 0,33 → il connaît les substitutions",
+  "→ changer d'échelle : 9B en RAG (écran suivant)"
+ ],
+ "16": [
+  "Même test, 1 000 produits : 9B ouvert et GPT-5.5 (ChatGPT)",
+  "9B sans exemples : ne connaît pas nos ingrédients (F1 0,34)",
+  "9B + 5 voisins : F1 0,45 ; contrefactuels 0,46 ≈ ChatGPT 0,51 (non significatif)",
+  "Tarte normande vegan : mon 0,5B garde les œufs ; 9B et ChatGPT substituent",
+  "Taille → substitutions ; entraînement ou voisins → nos ingrédients",
+  "9B local : pas de coût par requête, pas de recette envoyée"
+ ],
+ "17": [
+  "Remède proposé par ma référente",
+  "GPT-5.5 réécrit 2 400 recettes d'apprentissage (vegan, sans lait, sans œufs)",
+  "Mes vérificateurs en gardent 1 900 — ≈ 34 $",
+  "Réentraînement : vegan 8 % → 39 %, sans lait ↑, rien ne se dégrade",
+  "Crêpes vegan : lait et œufs remplacés",
+  "Limite : tic importé — protéine de pois partout"
+ ],
+ "18": [
+  "Sans entraînement : absurde (« beef-flour » dans des sablés)",
+  "Après : proche des étiquettes, % plausibles",
+  "Cookies sans œufs : pas d'œufs",
+  "Choix de marque (caramel, sirop) → le formulateur"
+ ],
+ "19": [
+  "Ingrédients → matières premières à acheter",
+  "Plusieurs MP possibles : 11 farines, 7 pépites",
+  "Solveur : proche de la cible + coût + cahier des charges",
+  "Cible exacte : 95 % des MP retrouvées",
+  "Depuis le seul nom : 1 sur 2 → ce que la prédiction doit encore apporter"
+ ],
+ "20": [
+  "Même madeleine, plusieurs cahiers des charges",
+  "Sans soja : pépites au tournesol ; sans soja strict : NON (traces sur les farines)",
+  "Halal : NON (pas d'huile certifiée) ; bio : partiel",
+  "3 verdicts motivés, jamais de substitution silencieuse"
+ ],
+ "21": [
+  "En direct, sur mon PC, sans internet",
+  "Tarte aux abricots vegan — modèle de base : beurre + œufs ✗ → solveur NON",
+  "Modèle augmenté : protéines de pois + margarine ✓ → oui, 2,84 €/kg",
+  "9B : réponses générées sur GPU Colab, rejouées ; vérification et solveur en direct",
+  "Export Crumble-AI, qui recalcule"
+ ],
+ "22": [
+  "Big Data : DuckDB, 7,9 Go",
+  "Supervisé et non supervisé : chaîne supervisée, voisins",
+  "Grands modèles : zero-shot → LoRA, RAG, données synthétiques, ChatGPT",
+  "Optimisation, réglementation, évaluation",
+  "L'intérêt : l'articulation des briques"
+ ],
+ "23": [
+  "Le nom ne dit pas tout (madeleines coquilles : beurre / huile)",
+  "Vegan : mieux grâce à l'augmentation, sous ChatGPT, tic protéine de pois",
+  "Vérificateurs : caramel au beurre salé passé (2 / 126)",
+  "Cahier des charges reconstruit ; référentiel petit",
+  "Suite : substituts variés, entraîner le 9B, intégrer dans Crumble-AI"
+ ],
+ "24": [
+  "Le marché = base d'apprentissage (étiquettes + réglementation)",
+  "Petit LLM, 2 h : listes crédibles + lit le cahier ; un grand modèle lui apprend les substitutions",
+  "Évaluation sans juge ; repères : chaîne supervisée, 9B, ChatGPT",
+  "Optimisation → matières premières dans Crumble-AI, qui recalcule",
+  "Le modèle propose, le calcul vérifie, l'optimisation arbitre, le formulateur décide — merci"
+ ],
+ "25": [
+  "Pour les questions : chaîne supervisée, bilan d'eau, Nutri-Score"
+ ],
+ "26": [
+  "Modèle 1 : le supervisé bat le kNN",
+  "Lexical > sémantique sur des noms courts",
+  "F1 0,57 pour un plafond de 0,62"
+ ],
+ "27": [
+  "Chaque ingrédient prédit s'explique par des mots du nom",
+  "Ne peut pas trancher beurre / huile : le nom ne le dit pas"
+ ],
+ "28": [
+  "6 profils de recette (k-means)",
+  "Plus proches des familles de formulation que du marketing"
+ ],
+ "29": [
+  "Ordre appris par paires : τ 0,50",
+  "% par gradient boosting : 7,1 pts (4,6 avec la nutrition)"
+ ],
+ "30": [
+  "Étiquette = produit fini ; recette = pâte",
+  "Lien : la matière sèche est conservée",
+  "106 g de pâte → 100 g de madeleines"
+ ],
+ "31": [
+  "Nutri-Score calculé, jamais prédit",
+  "98,9 % de lettres identiques à OFF (46 316 produits)",
+  "Contrainte du solveur : moins de points, meilleure lettre"
+ ]
+}

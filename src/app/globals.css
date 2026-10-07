@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+/* Thème repris à l'identique du minisite démos Crumble-AI (C:\Users\jccal\crumble_demos) :
+   ambre #fbae01 → #f59701, bleu nuit #021560 / #0228b5, encre #030f27, fond crème. Thème clair unique. */
+@theme {
+  --color-cream: #fbf7ef;
+  --color-paper: #ffffff;
+  --color-ink: #0a1428;
+  --color-ink-soft: #4b566d;
+  --color-navy: #021560;
+  --color-navy-deep: #030f27;
+  --color-blue: #0228b5;
+  --color-amber: #f59701;
+  --color-amber-bright: #fbae01;
+  --color-amber-deep: #a56300;
+  --color-amber-soft: #fdf3de;
+  --color-line: #eae2d2;
+  --color-ok: #1b8f5a;
+  --color-ko: #c62828;
+
+  --font-sans: "Segoe UI", "Segoe UI Variable Text", system-ui, -apple-system, sans-serif;
+  --font-mono: "Cascadia Mono", Consolas, ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* une section = un « écran » de présentation */
+.ecran {
+  scroll-margin-top: 4.25rem;
+}

@@ -1,0 +1,807 @@
+[
+ {
+  "titre": "Acronymes de l'IA (pour non-spécialistes)",
+  "entrees": [
+   {
+    "terme": "IA",
+    "definition": "Intelligence artificielle : programmes qui accomplissent des tâches qu'on croyait réservées à l'humain (lire, écrire, reconnaître, décider).",
+    "projet": "Le cadre général du projet et du DU."
+   },
+   {
+    "terme": "ML",
+    "definition": "Machine Learning, apprentissage automatique : au lieu d'écrire les règles, on montre des milliers d'exemples et le programme en déduit les règles.",
+    "projet": "La chaîne supervisée et le LLM fine-tuné apprennent sur 46 000 étiquettes Open Food Facts."
+   },
+   {
+    "terme": "MLIA",
+    "definition": "Machine Learning et Intelligence Artificielle : intitulé du diplôme universitaire (DU) de Sorbonne Université.",
+    "projet": "Le projet de fin d'études de ce DU."
+   },
+   {
+    "terme": "LLM",
+    "definition": "Large Language Model, grand modèle de langage : un programme entraîné sur d'énormes quantités de textes, qui écrit une réponse mot après mot (comme ChatGPT).",
+    "projet": "Écrit la liste d'ingrédients et les % à partir du nom du produit et du cahier des charges."
+   },
+   {
+    "terme": "GPT, ChatGPT",
+    "definition": "Generative Pre-trained Transformer : « modèle génératif pré-entraîné » d'OpenAI ; ChatGPT est l'application de conversation qui l'utilise.",
+    "projet": "GPT-5.5 sert de repère haut de gamme et a réécrit les recettes de l'augmentation ciblée."
+   },
+   {
+    "terme": "0,5B, 9B",
+    "definition": "B = billion, milliard (en anglais) de paramètres, c'est-à-dire de nombres réglés pendant l'entraînement : la « taille » du modèle.",
+    "projet": "Qwen 0,5B (tourne sur un PC) contre Qwen 9B (18 fois plus gros, a besoin d'un GPU)."
+   },
+   {
+    "terme": "RAG",
+    "definition": "Retrieval-Augmented Generation, génération augmentée par récupération : avant de répondre, le modèle reçoit des exemples proches trouvés dans une base, comme un cuisinier qui consulte des fiches recettes.",
+    "projet": "Les 5 produits les plus proches du nom demandé sont mis dans la question posée au modèle."
+   },
+   {
+    "terme": "LoRA",
+    "definition": "Low-Rank Adaptation, adaptation de faible rang : on spécialise un modèle existant en n'entraînant qu'une petite couche ajoutée (1,7 % des poids), comme une surcouche, sans toucher au modèle d'origine.",
+    "projet": "Entraîne le Qwen 0,5B sur les étiquettes en moins de 2 h sur un GPU gratuit."
+   },
+   {
+    "terme": "QLoRA",
+    "definition": "Quantized LoRA : LoRA appliqué à un modèle compressé (nombres stockés avec moins de précision) pour tenir dans moins de mémoire.",
+    "projet": "Perspective : entraîner le 9B sur un seul GPU L4."
+   },
+   {
+    "terme": "PEFT",
+    "definition": "Parameter-Efficient Fine-Tuning, ajustement économe en paramètres : la famille de méthodes (dont LoRA) qui n'entraînent qu'une petite partie du modèle ; aussi le nom de la bibliothèque Python.",
+    "projet": "Bibliothèque Hugging Face utilisée pour LoRA."
+   },
+   {
+    "terme": "GPU, CPU",
+    "definition": "Graphics / Central Processing Unit : carte graphique (des milliers de petits calculs en parallèle, indispensable pour entraîner) contre processeur classique de l'ordinateur.",
+    "projet": "Entraînement sur GPU Colab (T4, L4) ; le démonstrateur tourne sur le CPU du PC."
+   },
+   {
+    "terme": "API",
+    "definition": "Application Programming Interface : une « prise » qui permet à un programme d'en interroger un autre à distance (payant à la requête pour ChatGPT).",
+    "projet": "GPT-5.5 interrogé par l'API d'OpenAI ; le 9B, lui, peut tourner en local."
+   },
+   {
+    "terme": "NLP (TAL)",
+    "definition": "Natural Language Processing, traitement automatique du langage : tout ce qui fait lire ou écrire du texte à une machine.",
+    "projet": "Les noms de produits et listes d'ingrédients sont du texte : le projet est un problème de NLP."
+   },
+   {
+    "terme": "TF-IDF",
+    "definition": "Term Frequency – Inverse Document Frequency : on représente un texte par ses mots, en donnant plus de poids aux mots rares et parlants (« madeleine ») qu'aux mots courants (« de »).",
+    "projet": "Transforme le nom du produit en nombres ; sert à trouver les voisins (RAG) et au modèle 1."
+   },
+   {
+    "terme": "kNN",
+    "definition": "k Nearest Neighbors, k plus proches voisins : on prédit en copiant les k exemples les plus ressemblants.",
+    "projet": "Baseline du modèle 1 et recherche des 5 voisins du RAG."
+   },
+   {
+    "terme": "MLP",
+    "definition": "Multi-Layer Perceptron, perceptron multicouche : le réseau de neurones le plus simple, des couches de neurones empilées.",
+    "projet": "Comparé pour le modèle 1 (annexe A1) : la régression logistique reste meilleure."
+   },
+   {
+    "terme": "ACP (PCA), t-SNE",
+    "definition": "Analyse en composantes principales / t-distributed Stochastic Neighbor Embedding : deux façons de résumer des données à beaucoup de dimensions en une carte à 2 dimensions.",
+    "projet": "Visualiser les profils de recette (apprentissage non supervisé)."
+   },
+   {
+    "terme": "F1",
+    "definition": "Score qui combine précision (ce que j'ai prédit est-il juste ?) et rappel (ai-je tout trouvé ?), de 0 à 1.",
+    "projet": "Mesure la liste d'ingrédients : 0,43 pour le LoRA, 0,49 pour la chaîne supervisée, plafond 0,58."
+   },
+   {
+    "terme": "MAE",
+    "definition": "Mean Absolute Error, erreur absolue moyenne : de combien on se trompe en moyenne, ici en points de %.",
+    "projet": "Erreur sur les % d'ingrédients (≈ 7 points)."
+   },
+   {
+    "terme": "IC 95 %",
+    "definition": "Intervalle de confiance : la fourchette dans laquelle la vraie valeur se trouve 95 fois sur 100.",
+    "projet": "Accompagne chaque écart entre modèles."
+   },
+   {
+    "terme": "LP, QP",
+    "definition": "Linear / Quadratic Programming, programmation linéaire / quadratique : trouver la meilleure solution qui respecte des contraintes (inégalités).",
+    "projet": "Bornes des % d'ingrédients (LP) ; solveur qui choisit les matières premières (QP)."
+   }
+  ]
+ },
+ {
+  "titre": "Le problème et le métier",
+  "entrees": [
+   {
+    "terme": "Brief",
+    "definition": "La demande de départ, en quelques mots : « Madeleine aux pépites de chocolat », « Tarte aux abricots », « Biscuit riche en protéines ».",
+    "projet": "Entrée du modèle 1 ; dans l'application, complétée par la famille de produit et le cahier des charges."
+   },
+   {
+    "terme": "Cahier des charges",
+    "definition": "Les exigences du produit à développer : cibles nutritionnelles, Nutri-Score visé, allégations (bio, Halal…), ingrédients interdits, coût, chaque critère pondéré de « pas important » à « obligatoire ».",
+    "projet": "Contraintes et objectif de l'étape 3 (problème inverse) et de l'optimisation dans Crumble-AI."
+   },
+   {
+    "terme": "Ingrédient (ING)",
+    "definition": "Ce que l'on lit sur l'étiquette : farine de blé, sucre, pâte de cacao, lécithine de soja. Codifié ING-… dans Crumble-AI.",
+    "projet": "Niveau auquel Open Food Facts décrit les produits, donc niveau auquel on apprend (modèles 1 et 2)."
+   },
+   {
+    "terme": "Matière première (MP, RM)",
+    "definition": "L'objet que l'entreprise achète et met en œuvre : elle porte une composition en ingrédients (g/100 g), une nutrition, des allergènes, un coût, des certifications. Codifiée RM-… dans Crumble-AI.",
+    "projet": "Niveau auquel Crumble-AI formule ; cible du post-traitement (étape 3)."
+   },
+   {
+    "terme": "Article fournisseur / MP générique",
+    "definition": "Deux types de MP : la générique est l'objet de formulation (« pépites de chocolat noir 60 % »), l'article fournisseur est la référence achetée chez un fournisseur donné (RM-31054-A1, Barry Callebaut), avec son prix et ses documents.",
+    "projet": "Les recette Crumble-AI référencent des articles fournisseur ; le solveur choisit parmi eux."
+   },
+   {
+    "terme": "Composite",
+    "definition": "Ingrédient d'étiquette qui a lui-même des sous-ingrédients : « pépites de chocolat (sucre, pâte de cacao, beurre de cacao, émulsifiant : lécithine) ». Il correspond typiquement à une MP composite.",
+    "projet": "Deux conventions d'étiquette (décomposé ou non) ; on prédit au niveau composite et l'on compare au niveau aplati."
+   },
+   {
+    "terme": "Composition aplatie",
+    "definition": "La liste d'ingrédients obtenue en remplaçant chaque MP d'une recette par sa composition, pondérée par sa quantité, puis en regroupant les ingrédients identiques (le sucre des pépites s'ajoute au sucre de la recette).",
+    "projet": "Ce que l'étiquette générée par Crumble-AI affiche ; ce que le problème inverse doit reproduire."
+   },
+   {
+    "terme": "Recette (nomenclature, BOM)",
+    "definition": "La liste des MP (ou articles) et de leurs quantités pour un lot ; « recette » (bill of materials) est le terme des PLM et ERP, « recette » celui du formulateur — on dit recette.",
+    "projet": "Jeu de validation de l'étape 3 (retrouve-t-on la recette réelle à partir de son étiquette ?)."
+   },
+   {
+    "terme": "PLM",
+    "definition": "Product Lifecycle Management : logiciel de gestion du cycle de vie des produits (recettes, matières, étiquetage, conformité). Crumble-AI en est un, « IA-natif », pour l'agroalimentaire.",
+    "projet": "Cadre du projet ; le moteur de calcul (nutrition, Nutri-Score, coût) et l'optimisation sous contraintes y sont déjà opérationnels."
+   },
+   {
+    "terme": "Mode prédictif / rétro-ingénierie",
+    "definition": "Prédictif : on part d'un brief, l'ordre des ingrédients et la nutrition sont inconnus (ce sont des sorties). Rétro-ingénierie : on part d'une étiquette concurrente, ordre et nutrition sont connus (ce sont des entrées).",
+    "projet": "Les modèles 2a/2b sont évalués dans les deux modes ; l'écart entre les deux mesure le coût de l'ordre inconnu."
+   },
+   {
+    "terme": "Formulation prédictive",
+    "definition": "Proposer une recette (ingrédients, proportions, puis matières premières) à partir d'un brief, en apprenant sur les produits existants.",
+    "projet": "Titre et objet du projet."
+   }
+  ]
+ },
+ {
+  "titre": "Réglementation de l'étiquetage (INCO)",
+  "entrees": [
+   {
+    "terme": "INCO (règlement UE 1169/2011)",
+    "definition": "Le règlement européen sur l'information du consommateur : il fixe le contenu et la forme de l'étiquette (liste d'ingrédients, allergènes, nutrition, QUID).",
+    "projet": "Source des règles exploitées comme contraintes dans le modèle 2."
+   },
+   {
+    "terme": "Ordre pondéral décroissant (annexe VII)",
+    "definition": "Les ingrédients sont listés du plus lourd au plus léger, en quantité mise en œuvre.",
+    "projet": "Supervision du modèle 2a (comparaisons par paires) et contrainte p₁ ≥ p₂ ≥ … dans les bornes et la projection."
+   },
+   {
+    "terme": "Règle des 2 %",
+    "definition": "Les ingrédients représentant moins de 2 % du produit peuvent être listés dans un ordre quelconque, en fin de liste.",
+    "projet": "L'ordre est imposé avec une tolérance de 2 points (pᵢ₊₁ ≤ pᵢ + 2) ; la queue de liste est peu contrainte."
+   },
+   {
+    "terme": "QUID (annexe VIII)",
+    "definition": "Quantitative Ingredient Declaration : l'obligation d'indiquer le pourcentage d'un ingrédient quand il est mis en avant dans la dénomination ou l'image (« aux pépites de chocolat » → % de pépites). Exprimé sur le produit fini, il peut dépasser 100 au total après perte au four.",
+    "projet": "Vérité terrain du modèle 2b (~90 000 valeurs) ; feature « nommé dans le brief » ; l'ingrédient nommé est ajouté par définition au bout en bout."
+   },
+   {
+    "terme": "Eau masquée",
+    "definition": "L'eau ajoutée est déclarée pour son poids restant dans le produit fini et peut être omise sous 5 % ; l'eau évaporée à la cuisson n'apparaît jamais.",
+    "projet": "La somme des ingrédients listés est prise entre 95 et 105 ; le bilan d'eau fait la conversion étiquette → recette."
+   },
+   {
+    "terme": "Base étiquette / base pâte",
+    "definition": "Base étiquette : pourcentages pour 100 g de produit fini, eau masquée. Base pâte : quantités mises en œuvre pour 100 g de pâte, eau comprise, avant la perte au four.",
+    "projet": "Les modèles travaillent en base étiquette ; le solveur (étape 3) travaille en base pâte."
+   },
+   {
+    "terme": "Rendement massique",
+    "definition": "Masse de produit fini divisée par la masse de pâte mise en œuvre (une madeleine : ≈ 90–97 %). La perte est de l'eau.",
+    "projet": "Calculé par le bilan de matière sèche ; paramètre des recettes Crumble-AI."
+   },
+   {
+    "terme": "Humidité, matière sèche",
+    "definition": "Humidité : teneur en eau (%) d'un ingrédient ou d'un produit (œuf 76 %, beurre 15 %, madeleine 14 %, biscuit sec 4 %). Matière sèche : le reste. La matière sèche est conservée à la cuisson.",
+    "projet": "Équation qui relie les deux bases ; humidité des MP (CIQUAL ou fiche fournisseur) et du produit fini (par famille)."
+   },
+   {
+    "terme": "Allergènes en trois états",
+    "definition": "Pour chacun des 14 allergènes UE : présent, traces possibles (contamination croisée), absence garantie.",
+    "projet": "Attribut des MP ; contrainte « sans allergène X » du cahier des charges (exclut présent et traces)."
+   },
+   {
+    "terme": "Nutri-Score (algorithme 2023)",
+    "definition": "Score de −17 à 55 puis lettre A–E, calculé de façon déterministe à partir de la nutrition pour 100 g : points défavorables N (énergie, sucres, acides gras saturés, sel) moins points favorables P (protéines, fibres, fruits-légumes-légumineuses), avec des barèmes par catégorie (aliments généraux, fromages, matières grasses, boissons) et une règle sur les protéines.",
+    "projet": "Jamais prédit : implémenté dans src/nutriscore.py d'après la spec « Calcul du Nutri-Score » (consolidation de recette, points N/P, seuils suivants), validé sur 46 316 produits OFF (98,9 % de lettres identiques, 99,4 % de scores à ±1) ; contrainte / objectif à l'étape 4."
+   },
+   {
+    "terme": "Composante FLV",
+    "definition": "Fruits, légumes et légumineuses : part du produit (en équivalent frais) comptée comme telle dans le Nutri-Score ; les fruits à coque, graines et huiles ne comptent plus depuis 2023.",
+    "projet": "Portée par l'attribut fvlFraction des MP ; sans elle, la tarte aux abricots aurait un score faux."
+   },
+   {
+    "terme": "NOVA, Green-Score",
+    "definition": "NOVA : degré de transformation (1 à 4). Green-Score (ex Eco-Score) : impact environnemental A–E.",
+    "projet": "Données descriptives d'Open Food Facts ; contraintes possibles du cahier des charges."
+   },
+   {
+    "terme": "Dénomination INCO",
+    "definition": "La liste d'ingrédients réglementaire générée à partir de la composition aplatie, dans l'ordre décroissant, avec les allergènes en évidence et les QUID.",
+    "projet": "Sortie de Crumble-AI ; cible que le problème inverse doit rendre semblable à celles du marché."
+   }
+  ]
+ },
+ {
+  "titre": "Données et outils",
+  "entrees": [
+   {
+    "terme": "Open Food Facts (OFF)",
+    "definition": "Base collaborative ouverte (licence ODbL) de ~3,9 millions de produits alimentaires : nom, catégories, liste d'ingrédients analysée, nutrition, scores, allégations.",
+    "projet": "Base d'apprentissage : ~50 000 produits de boulangerie-pâtisserie sucrée en Europe."
+   },
+   {
+    "terme": "Taxonomie OFF",
+    "definition": "Hiérarchie d'identifiants normalisés pour les catégories (en:madeleines) et les ingrédients (en:wheat-flour, en:dark-chocolate).",
+    "projet": "Identifiants des ingrédients ; canonisation des variantes (en:whole-egg → en:egg)."
+   },
+   {
+    "terme": "off_tag",
+    "definition": "Identifiant normalisé d'un ingrédient dans la taxonomie Open Food Facts (en:wheat-flour, en:dark-chocolate) : toutes les graphies et langues d'une même étiquette y sont rattachées. Le préfixe en: indique un identifiant canonique anglais ; un ingrédient non reconnu garde sa langue (fr:…).",
+    "projet": "Clé de jointure entre les modèles (qui apprennent sur ces identifiants) et le référentiel Crumble-AI, dont chaque ING porte un off_tag : 78 des 150 ingrédients du vocabulaire s'alignent ainsi exactement."
+   },
+   {
+    "terme": "percent / percent_estimate",
+    "definition": "Dans OFF, percent est le QUID lu sur l'étiquette ; percent_estimate est une estimation heuristique d'OFF (ordre + somme + QUID connus).",
+    "projet": "percent est la cible ; percent_estimate n'est pas une baseline recevable (il recopie le QUID quand il existe)."
+   },
+   {
+    "terme": "Dump Parquet, DuckDB, Hugging Face",
+    "definition": "Le dump OFF est publié au format Parquet (colonnes compressées, 7,9 Go) sur Hugging Face ; DuckDB est un moteur SQL analytique qui filtre ce fichier en quelques dizaines de secondes sans le charger en mémoire.",
+    "projet": "Étape 0 (module Big Data) : src/download_off.py, src/off_extract.py."
+   },
+   {
+    "terme": "CIQUAL (ANSES)",
+    "definition": "Table de composition nutritionnelle de référence française : 3 186 aliments avec nutrition et teneur en eau.",
+    "projet": "Profils nutritionnels et humidité des ingrédients (modèle nutritionnel, bilan d'eau) ; humidité des produits finis par famille."
+   },
+   {
+    "terme": "Canonisation",
+    "definition": "Regrouper les variantes d'un même ingrédient sous un identifiant unique (œufs frais, œufs entiers → œuf ; colza = rapeseed).",
+    "projet": "Vocabulaire de 150 ingrédients couvrant les trois quarts des occurrences."
+   },
+   {
+    "terme": "Vocabulaire fermé",
+    "definition": "Le modèle 1 ne peut prédire que les 150 ingrédients de son vocabulaire ; un ingrédient rare (abricot) n'y est pas.",
+    "projet": "Compensé au bout en bout par la règle QUID : l'ingrédient nommé dans le brief est ajouté par définition."
+   },
+   {
+    "terme": "Famille de produit",
+    "definition": "Catégorie métier unique dérivée des catégories OFF : madeleines, cookies, sablés, tartes, brioches, barres…",
+    "projet": "Feature des modèles ; humidité de produit fini par famille ; analyse des résultats par famille."
+   },
+   {
+    "terme": "Notebook Jupyter",
+    "definition": "Document mêlant texte, code Python et résultats, exécutable d'une traite (« Restart & Run All »).",
+    "projet": "Livrables : 01 (données, modèle 1), 02 (modèle 2), 03 (problème inverse, à venir)."
+   },
+   {
+    "terme": "Graine aléatoire (seed)",
+    "definition": "Valeur fixée pour rendre reproductibles les tirages aléatoires (échantillons, initialisations).",
+    "projet": "SEED = 42 dans tous les notebooks."
+   }
+  ]
+ },
+ {
+  "titre": "Apprentissage supervisé",
+  "entrees": [
+   {
+    "terme": "Apprentissage supervisé",
+    "definition": "Apprendre une fonction entrée → sortie à partir d'exemples où la sortie (la cible) est connue.",
+    "projet": "Modèle 1 (cible : ingrédients présents), modèle 2a (ordre), modèle 2b (pourcentages)."
+   },
+   {
+    "terme": "Cible / label",
+    "definition": "La valeur à prédire dans les exemples d'apprentissage.",
+    "projet": "Présence d'un ingrédient (0/1), position dans la liste, pourcentage déclaré."
+   },
+   {
+    "terme": "Feature / variable explicative",
+    "definition": "Une information d'entrée du modèle.",
+    "projet": "Mots du brief, famille, rang, statistiques d'ingrédient, nutrition (mode rétro)."
+   },
+   {
+    "terme": "Classification multi-label",
+    "definition": "Prédire plusieurs étiquettes non exclusives à la fois : un produit contient farine ET sucre ET œufs.",
+    "projet": "Modèle 1 : un vecteur de 150 présences/absences par brief."
+   },
+   {
+    "terme": "Régression",
+    "definition": "Prédire une valeur numérique continue.",
+    "projet": "Modèle 2b : le pourcentage d'un ingrédient."
+   },
+   {
+    "terme": "Baseline",
+    "definition": "Méthode simple servant de référence : si un modèle ne la bat pas, il n'apporte rien.",
+    "projet": "Fréquence par famille, kNN, rang médian par ingrédient, médiane par (rang, taille), milieu d'intervalle LP."
+   },
+   {
+    "terme": "k plus proches voisins (kNN)",
+    "definition": "Prédire à partir des k exemples d'apprentissage les plus ressemblants (ici : produits au nom le plus proche) ; pas d'apprentissage de paramètres.",
+    "projet": "Cadrage initial du projet, conservé comme baseline du modèle 1 (k = 10 choisi par validation croisée)."
+   },
+   {
+    "terme": "TF-IDF",
+    "definition": "Représentation d'un texte par la fréquence de ses mots et fragments de mots (n-grammes), pondérée par leur rareté dans le corpus. Lexicale : « pépites » et « morceaux » sont deux dimensions différentes.",
+    "projet": "Meilleure représentation du brief pour le modèle 1 (bat les embeddings sur des noms courts)."
+   },
+   {
+    "terme": "n-gramme",
+    "definition": "Suite de n éléments consécutifs : mots (« madeleine aux ») ou caractères (« eine ») ; les n-grammes de caractères résistent aux fautes et aux langues.",
+    "projet": "TF-IDF mots (1–2) + caractères (3–5)."
+   },
+   {
+    "terme": "Embedding (plongement)",
+    "definition": "Vecteur dense (ici 384 nombres) représentant le sens d'un texte, produit par un réseau de neurones pré-entraîné ; deux textes proches de sens ont des vecteurs proches, y compris entre langues.",
+    "projet": "sentence-transformers multilingue ; kNN et MLP du modèle 1 ; moins bon que TF-IDF ici."
+   },
+   {
+    "terme": "Régression logistique un-contre-tous (OvR)",
+    "definition": "Un classifieur linéaire par étiquette (150 modèles), chacun donnant une probabilité ; régularisé par un paramètre C (grand C = moins de régularisation).",
+    "projet": "Meilleur modèle 1 (C = 3 par validation croisée) ; ses coefficients expliquent quels mots poussent quel ingrédient."
+   },
+   {
+    "terme": "Régularisation",
+    "definition": "Pénalité qui limite la complexité du modèle pour éviter le sur-apprentissage (L2 : petits coefficients).",
+    "projet": "C de la régression logistique ; weight decay et dropout du MLP ; rétrécissement des statistiques."
+   },
+   {
+    "terme": "Sur-apprentissage (overfitting)",
+    "definition": "Le modèle apprend le bruit des exemples et généralise mal : très bon sur l'apprentissage, décevant sur des données nouvelles.",
+    "projet": "Contrôlé par le découpage anti-fuite, la validation croisée, l'arrêt sur validation du MLP."
+   },
+   {
+    "terme": "Perceptron multicouche (MLP)",
+    "definition": "Réseau de neurones à couches denses avec non-linéarités (ReLU) ; entraîné par descente de gradient sur une fonction de perte.",
+    "projet": "Modèle 1 en PyTorch : SVD du TF-IDF + embeddings → 512 → 256 → 150 sorties sigmoïdes."
+   },
+   {
+    "terme": "PyTorch, BCE, AdamW, dropout, époque",
+    "definition": "PyTorch : bibliothèque de réseaux de neurones. BCE : entropie croisée binaire, perte pour des sorties 0/1. AdamW : optimiseur adaptatif avec décroissance des poids. Dropout : désactivation aléatoire de neurones à l'entraînement (régularisation). Époque : un passage complet sur les données.",
+    "projet": "Entraînement du MLP, courbe d'apprentissage, sélection de la meilleure époque sur la validation."
+   },
+   {
+    "terme": "SVD tronquée / LSA",
+    "definition": "Réduction d'une matrice creuse de grande dimension (TF-IDF, 47 000 colonnes) à quelques centaines de dimensions denses en conservant l'essentiel de la variance.",
+    "projet": "Entrée du MLP (300 dimensions)."
+   },
+   {
+    "terme": "Gradient boosting (HistGradientBoosting)",
+    "definition": "Ensemble d'arbres de décision construits séquentiellement, chacun corrigeant les erreurs des précédents ; gère nativement les variables catégorielles et les valeurs manquantes.",
+    "projet": "Modèle 2a (classifieur de paires) et 2b (régression, perte L1)."
+   },
+   {
+    "terme": "Perte L1 (absolute error)",
+    "definition": "Fonction de coût = valeur absolue de l'erreur ; robuste aux valeurs aberrantes (contrairement au carré de l'erreur).",
+    "projet": "Modèle 2b, car certains QUID sont faux (teneur en cacao prise pour un QUID)."
+   },
+   {
+    "terme": "Hyperparamètre",
+    "definition": "Réglage fixé avant l'apprentissage (C, nombre d'arbres, taux d'apprentissage, k), choisi par validation.",
+    "projet": "Validation croisée en 3 plis groupés."
+   },
+   {
+    "terme": "Découpage apprentissage / validation / test",
+    "definition": "Apprentissage (70 %) : ajuster le modèle. Validation (10 %) : choisir seuil et hyperparamètres. Test (20 %) : mesurer la performance finale, une seule fois.",
+    "projet": "Même découpage pour tous les notebooks (model1_dataset.parquet)."
+   },
+   {
+    "terme": "Fuite (leakage) et découpage par groupes",
+    "definition": "Fuite : une information du test se retrouve dans l'apprentissage (ici, le même nom de produit chez deux marques). Découpage par groupes (GroupShuffleSplit, GroupKFold) : tous les produits de même nom vont du même côté.",
+    "projet": "Garantit que les scores sont mesurés sur des noms jamais vus."
+   },
+   {
+    "terme": "Validation croisée (k plis)",
+    "definition": "Découper l'apprentissage en k parties ; entraîner k fois sur k−1 parties et évaluer sur la restante ; moyenner. Évite de choisir les hyperparamètres au hasard d'un seul découpage.",
+    "projet": "3 plis groupés pour k (kNN), C (logistique), taux d'apprentissage (gradient boosting)."
+   },
+   {
+    "terme": "Courbe d'apprentissage",
+    "definition": "Évolution de la perte et d'une métrique de validation au fil des époques ; permet de voir le sur-apprentissage.",
+    "projet": "MLP du modèle 1."
+   },
+   {
+    "terme": "Ensemble",
+    "definition": "Combiner plusieurs modèles (moyenne des probabilités) pour gagner en robustesse.",
+    "projet": "Logistique TF-IDF + MLP (modèle 1)."
+   },
+   {
+    "terme": "Encodage par cible (target encoding)",
+    "definition": "Remplacer une catégorie (un ingrédient) par des statistiques de la cible calculées sur l'apprentissage seul : fréquence, rang médian, % médian.",
+    "projet": "Statistiques d'ingrédient des modèles 2a/2b."
+   },
+   {
+    "terme": "Rétrécissement (shrinkage)",
+    "definition": "Tirer une statistique calculée sur peu d'exemples vers une valeur de référence (la médiane de sa classe) pour ne pas faire confiance à deux observations.",
+    "projet": "% médian des ingrédients ayant peu de QUID (k = 10)."
+   },
+   {
+    "terme": "Prior « ingrédient rare »",
+    "definition": "Valeurs par défaut données à un ingrédient jamais vu à l'apprentissage : celles des ingrédients rares.",
+    "projet": "Évite des valeurs manquantes inconnues du modèle et rend la comparaison aux baselines équitable."
+   },
+   {
+    "terme": "Apprentissage par paires (learning to rank)",
+    "definition": "Apprendre à comparer deux éléments (« i précède j ») plutôt qu'à prédire une position absolue ; le score d'un élément est sa probabilité moyenne de précéder les autres.",
+    "projet": "Modèle 2a ; la supervision vient de l'ordre décroissant, disponible sur 100 % des lignes."
+   },
+   {
+    "terme": "Stacking (empilement)",
+    "definition": "Entraîner un modèle sur les sorties d'un autre, produites hors échantillon (validation croisée), pour qu'il apprenne avec le bruit qu'il verra à l'inférence.",
+    "projet": "Modèle 2b prédictif, entraîné sur les rangs prédits par le modèle 2a."
+   },
+   {
+    "terme": "Explicabilité",
+    "definition": "Rendre compréhensible une prédiction : quels mots ont poussé quel ingrédient (coefficients × TF-IDF), quels voisins ont motivé le kNN, quel intervalle est admissible.",
+    "projet": "Exigence du projet ; sections « les trois briefs » des notebooks."
+   },
+   {
+    "terme": "Chaîne supervisée",
+    "definition": "Les trois modèles d'apprentissage supervisé enchaînés, un par question : quels ingrédients (modèle 1, régression logistique), dans quel ordre (modèle 2a, classement par paires), en quelles proportions (modèle 2b, gradient boosting). Aucun réseau de neurones.",
+    "projet": "Point de comparaison (baseline) du LLM : meilleure sur la liste (F1 0,49), mais ne lit pas le cahier des charges ; fournit les % au solveur dans le démonstrateur."
+   }
+  ]
+ },
+ {
+  "titre": "Métriques d'évaluation",
+  "entrees": [
+   {
+    "terme": "Précision, rappel",
+    "definition": "Précision : parmi ce que le modèle affirme, la part qui est vraie (« ne pas inventer »). Rappel : parmi ce qui est vrai, la part trouvée (« ne pas oublier »).",
+    "projet": "Modèle 1 ; se règlent l'un contre l'autre par le seuil."
+   },
+   {
+    "terme": "F1, F1 micro, F1 macro",
+    "definition": "F1 : moyenne harmonique précision–rappel (1 = parfait). Micro : toutes les lignes dans le même sac, dominé par les ingrédients fréquents. Macro : F1 par ingrédient puis moyenne, chaque ingrédient compte autant — révèle la qualité sur les ingrédients rares.",
+    "projet": "Modèle 1 : 0,57 micro / 0,36 macro pour la logistique TF-IDF + famille."
+   },
+   {
+    "terme": "Seuil de décision",
+    "definition": "Score au-dessus duquel une étiquette est déclarée présente ; choisi sur la validation.",
+    "projet": "Modèle 1 (≈ 0,28) ; 0,3 au bout en bout, avec un minimum de 8 ingrédients."
+   },
+   {
+    "terme": "Précision@k, rappel@k",
+    "definition": "Mêmes notions calculées sur les k éléments les mieux classés seulement (k = 8) : la lecture « liste de candidats ».",
+    "projet": "Modèle 1 : P@8 ≈ 0,60."
+   },
+   {
+    "terme": "Jaccard",
+    "definition": "Intersection / union de deux ensembles ; 1 = identiques, 0 = disjoints.",
+    "projet": "Ressemblance entre liste prédite et liste réelle ; agrément entre produits de même nom (0,50)."
+   },
+   {
+    "terme": "Plafond naturel",
+    "definition": "Niveau de performance qu'aucun modèle ne peut dépasser parce que l'entrée ne contient pas l'information : deux produits de même nom ne partagent leurs ingrédients qu'à F1 ≈ 0,62.",
+    "projet": "Référence pour lire le 0,57 du modèle 1."
+   },
+   {
+    "terme": "MAE (erreur absolue moyenne)",
+    "definition": "Moyenne de |prédit − réel| ; ici en points de pourcentage : une MAE de 5 = on se trompe en moyenne de 5 points. Lisible et robuste, pénalise chaque point d'écart également.",
+    "projet": "Modèle 2b : 4,6 (rétro + nutrition) à 7,1 (prédictif)."
+   },
+   {
+    "terme": "Médiane AE",
+    "definition": "Médiane des erreurs absolues : la moitié des lignes ont une erreur inférieure ; insensible aux aberrants.",
+    "projet": "Modèle 2b."
+   },
+   {
+    "terme": "τ (tau) de Kendall",
+    "definition": "Part des paires classées dans le bon sens moins la part classée à l'envers ; 1 = ordre parfait, 0 = hasard, −1 = inversé.",
+    "projet": "Modèle 2a : 0,50 en tête de liste, 0,61 sur la liste entière."
+   },
+   {
+    "terme": "Couverture d'un intervalle",
+    "definition": "Part des cas où la vraie valeur tombe dans l'intervalle prédit.",
+    "projet": "Bornes LP : 96,6 %."
+   },
+   {
+    "terme": "Silhouette",
+    "definition": "Mesure de qualité d'un clustering : proximité de chaque point à son groupe comparée au groupe voisin (−1 à 1) ; sert à choisir le nombre de clusters.",
+    "projet": "Notebook 1, k-means : plate (≈ 0,10), k = 6 choisi pour l'interprétation."
+   },
+   {
+    "terme": "Variance expliquée",
+    "definition": "Part de l'information (variance) conservée par les premières composantes d'une ACP.",
+    "projet": "Notebook 1 : 13 % / 38 % / 53 % pour 2 / 10 / 20 composantes."
+   }
+  ]
+ },
+ {
+  "titre": "Apprentissage non supervisé",
+  "entrees": [
+   {
+    "terme": "Non supervisé",
+    "definition": "Trouver une structure dans les données sans cible : groupes, dimensions principales, visualisation.",
+    "projet": "Notebook 1, section 4."
+   },
+   {
+    "terme": "ACP (PCA)",
+    "definition": "Analyse en composantes principales : projeter les données sur les directions de plus grande variance pour réduire la dimension.",
+    "projet": "150 indicateurs d'ingrédients + 8 nutriments → 20 composantes."
+   },
+   {
+    "terme": "k-means",
+    "definition": "Partitionner les points en k groupes autour de centres, en minimisant les distances intra-groupe.",
+    "projet": "Six profils de recette (chocolatés, pur beurre, barres protéinées, pain d'épices, viennoiseries, industriels)."
+   },
+   {
+    "terme": "t-SNE",
+    "definition": "Projection non linéaire en 2D qui préserve les voisinages, pour visualiser des données de grande dimension.",
+    "projet": "Carte des produits colorée par famille et par cluster."
+   },
+   {
+    "terme": "Cluster / profil de recette",
+    "definition": "Groupe de produits partageant ingrédients et nutrition, indépendamment de leur catégorie marketing.",
+    "projet": "Servira à situer une formulation proposée par rapport au marché."
+   }
+  ]
+ },
+ {
+  "titre": "Optimisation et contraintes",
+  "entrees": [
+   {
+    "terme": "Contrainte",
+    "definition": "Condition que la solution doit respecter (égalité ou inégalité) : somme = 100, ordre décroissant, quantité ≥ 0, sans huile de palme.",
+    "projet": "Bornes, projection, problème inverse, optimisation Crumble-AI."
+   },
+   {
+    "terme": "Programmation linéaire (LP)",
+    "definition": "Optimiser une fonction linéaire sous contraintes linéaires ; résolu exactement et vite (solveur HiGHS).",
+    "projet": "bornes_lp : minimum et maximum admissibles de chaque ingrédient."
+   },
+   {
+    "terme": "Intervalle admissible [min, max]",
+    "definition": "Plage de valeurs compatibles avec toutes les contraintes connues (ordre, somme, QUID voisins) ; son milieu est une prédiction sans apprentissage.",
+    "projet": "Affiché avec chaque proportion prédite ; baseline réglementaire."
+   },
+   {
+    "terme": "Polytope, ensemble admissible",
+    "definition": "L'ensemble des solutions respectant toutes les contraintes ; convexe ici.",
+    "projet": "Espace dans lequel la projection ramène les prédictions."
+   },
+   {
+    "terme": "Projection sur l'ensemble admissible",
+    "definition": "Trouver la solution admissible la plus proche d'une prédiction brute (moindres carrés sous contraintes) ; pondérée par l'erreur relative pour que les gros ingrédients absorbent la correction.",
+    "projet": "projeter_ordonne (SLSQP)."
+   },
+   {
+    "terme": "Moindres carrés (non négatifs, sous contraintes)",
+    "definition": "Minimiser la somme des carrés des écarts ; NNLS : avec des variables positives ; ici avec ordre et somme en plus.",
+    "projet": "Modèle nutritionnel : nutrition du produit ≈ somme pondérée des profils des ingrédients."
+   },
+   {
+    "terme": "SLSQP",
+    "definition": "Algorithme d'optimisation non linéaire sous contraintes (programmation quadratique séquentielle).",
+    "projet": "Projection et modèle nutritionnel (scipy)."
+   },
+   {
+    "terme": "Problème inverse",
+    "definition": "Retrouver les causes (recette) à partir des effets observés (étiquette, nutrition) — l'inverse du calcul direct que fait le moteur de Crumble-AI.",
+    "projet": "Étape 3 : choisir des articles et leurs quantités pour que la composition aplatie reproduise la prédiction."
+   },
+   {
+    "terme": "Problème mal posé",
+    "definition": "Plusieurs solutions très différentes expliquent aussi bien les observations (deux recettes donnent la même nutrition) ; il faut un a priori ou des contraintes pour trancher.",
+    "projet": "Pourquoi le modèle nutritionnel seul est faible et pourquoi l'a priori appris compte."
+   },
+   {
+    "terme": "Régularisation λ, hybride",
+    "definition": "Ajouter au critère nutritionnel un terme de fidélité à la prédiction apprise, pondéré par λ ; λ grand = on suit le modèle appris.",
+    "projet": "ajuster_nutritionnel ; l'hybride n'a pas apporté de gain ici."
+   },
+   {
+    "terme": "Ancrage",
+    "definition": "Valeur imposée (égalité) dans la projection ou les bornes : un QUID connu.",
+    "projet": "Mode rétro-ingénierie."
+   },
+   {
+    "terme": "Solveur du projet vs moteur Crumble-AI",
+    "definition": "Le solveur du projet (src/crumble.py, fonction resoudre) répond à « avec quelles MP et en quelle quantité ? » : programme quadratique convexe sur le référentiel, guidé par la prédiction apprise et le cahier des charges ; il produit un prototype et un verdict. Le moteur Crumble-AI (déjà opérationnel) recalcule ensuite nutrition, allergènes, étiquette INCO, Nutri-Score et coût sur la recette chargée, et optimise les quantités selon les règles de l'entreprise : son calcul fait foi.",
+    "projet": "Étape 3 = solveur du projet ; étape 4 = moteur Crumble-AI. Le recouvrement (contraintes Nutri-Score dans le solveur) est voulu : le choix des MP et le Nutri-Score ne sont pas séparables."
+   },
+   {
+    "terme": "Classe de composition / MP interchangeables",
+    "definition": "Ensemble de MP ayant exactement la même composition en ingrédients (huit farines de blé : T45, T55, bio, halal…) : indiscernables sur l'étiquette, différentes par le coût, la certification, l'origine.",
+    "projet": "39 classes dans le référentiel ; le solveur fusionne les équivalentes sur la moins chère et les rend comme « alternatives »."
+   },
+   {
+    "terme": "Composite visé",
+    "definition": "MP composite explicitement appelée par la prédiction ou par l'étiquette (« pépites de chocolat ») ; le solveur la préfère à sa reconstitution à partir de ses ingrédients.",
+    "projet": "Bonus linéaire dans l'objectif ; fait passer la précision des MP retrouvées de 0,83 à 0,94."
+   },
+   {
+    "terme": "Candidates",
+    "definition": "MP admissibles dont tous les ingrédients figurent dans la cible ; réduit le problème de 281 à quelques dizaines de variables.",
+    "projet": "Sélection avant résolution ; l'eau est toujours candidate."
+   },
+   {
+    "terme": "Plafonds techniques",
+    "definition": "Bornes par catégorie de MP et classe de composition (additifs ≤ 1,5 %, arômes ≤ 1 %) en attendant les doses maximales réglementaires (règlement 1333/2008) embarquées dans Crumble-AI.",
+    "projet": "Contraintes du solveur (étape 3)."
+   },
+   {
+    "terme": "Règle des 95 % (bio)",
+    "definition": "Un produit bio doit contenir au moins 95 % d'ingrédients agricoles issus de l'agriculture biologique (règlement UE 2018/848) ; additifs, sel, eau sont hors calcul.",
+    "projet": "Contrainte linéaire du cahier des charges « bio », plutôt qu'une exclusion de toutes les MP non bio."
+   },
+   {
+    "terme": "Cible nutritionnelle",
+    "definition": "Borne sur un nutriment pour 100 g de produit fini (sel ≤ 0,8 g, protéines ≥ 12 g) : linéaire en les quantités de MP.",
+    "projet": "Contraintes du cahier des charges ; itérations Nutri-Score guidées par les seuils suivants."
+   },
+   {
+    "terme": "Faisabilité",
+    "definition": "Verdict du solveur : un cahier des charges est infaisable quand plus de 5 % de la cible n'a aucune MP admissible ou quand la recette s'éloigne trop de la cible.",
+    "projet": "Halal certifié (pas de cacao certifié), sans soja strict (traces sur les farines) → « NON », motivé."
+   },
+   {
+    "terme": "Bout en bout",
+    "definition": "Évaluation de la chaîne complète depuis le nom du produit : modèle 1 → règle QUID → modèle 2a → 2b → bilan d'eau → alignement → solveur, contre la recette réelle.",
+    "projet": "50 produits Crumble-AI : précision / rappel des MP ≈ 0,5, lettre Nutri-Score identique 70 %."
+   },
+   {
+    "terme": "Payload de chargement",
+    "definition": "Fichier JSON au format attendu par le job de chargement de dev.crumble-ai.com : recette (recette en kg de lot, perte en eau par composant) + produit fini, avec les références dev des MP.",
+    "projet": "Export des formulations proposées (REC-91001…) : Crumble-AI recalcule et fait foi."
+   },
+   {
+    "terme": "Optimisation multicritère",
+    "definition": "Arbitrer plusieurs objectifs (coût, Nutri-Score, écart à la prédiction) et contraintes (obligatoires) ; les critères pondérés du cahier des charges entrent dans la fonction objectif.",
+    "projet": "Étape 4, moteur Crumble-AI."
+   }
+  ]
+ },
+ {
+  "titre": "Grands modèles de langage (LLM)",
+  "entrees": [
+   {
+    "terme": "LLM (grand modèle de langage)",
+    "definition": "Réseau de neurones entraîné à prédire le mot suivant sur d'immenses corpus de textes ; il écrit une réponse mot après mot à partir d'une consigne.",
+    "projet": "Écrit la liste d'ingrédients ordonnée et les % déclarés (QUID) à partir du nom, de la catégorie et du cahier des charges."
+   },
+   {
+    "terme": "Token",
+    "definition": "Morceau de mot (ou signe) que le modèle lit et écrit ; un ingrédient fait souvent plusieurs tokens.",
+    "projet": "Longueur des prompts et des réponses ; seuls les tokens de la réponse comptent dans la perte d'entraînement."
+   },
+   {
+    "terme": "Prompt, message système",
+    "definition": "Le texte donné au modèle : une consigne générale (message système) puis la demande (nom, catégorie, cahier des charges).",
+    "projet": "Message système court commun à tous les modèles ; même prompt pour le 0,5B, le 9B et GPT-5.5."
+   },
+   {
+    "terme": "Modèle décodeur (génératif)",
+    "definition": "LLM qui produit le texte de gauche à droite (famille GPT, Qwen, Llama), par opposition aux encodeurs qui ne font que représenter un texte.",
+    "projet": "Tous les LLM du projet sont des décodeurs « Instruct » (entraînés à suivre des consignes)."
+   },
+   {
+    "terme": "Qwen2.5-0.5B / 1.5B",
+    "definition": "Petits LLM ouverts d'Alibaba (0,5 et 1,5 milliard de paramètres) : tournent sur un PC, sans GPU.",
+    "projet": "Modèle fine-tuné du projet (0,5B) ; le 1,5B ne fait qu'un peu mieux."
+   },
+   {
+    "terme": "Qwen3.5-9B",
+    "definition": "LLM ouvert de 9 milliards de paramètres, 18 fois plus gros : il connaît beaucoup plus de recettes et de substitutions.",
+    "projet": "Utilisé sans entraînement, en RAG (5 voisins) : F1 0,45, contrefactuels 0,46 ≈ ChatGPT ; rejoué dans le démonstrateur."
+   },
+   {
+    "terme": "GPT-5.5 (ChatGPT)",
+    "definition": "Grand modèle propriétaire d'OpenAI, accessible par API (payant, données envoyées à l'extérieur).",
+    "projet": "Repère haut de gamme (contrefactuels 0,51) et générateur de l'augmentation ciblée."
+   },
+   {
+    "terme": "Zero-shot, few-shot",
+    "definition": "Interroger le modèle sans exemple (zero-shot) ou avec quelques exemples fixes dans le prompt (few-shot), sans modifier ses poids.",
+    "projet": "Premières baselines du 0,5B : inventent un ingrédient sur quatre (zero-shot)."
+   },
+   {
+    "terme": "RAG (génération augmentée par récupération)",
+    "definition": "On cherche d'abord des documents proches de la demande, puis on les met dans le prompt pour guider la réponse.",
+    "projet": "Les 5 produits d'apprentissage les plus proches (TF-IDF sur le nom) et leurs listes servent d'exemples."
+   },
+   {
+    "terme": "Fine-tuning",
+    "definition": "Continuer l'entraînement d'un modèle déjà entraîné sur des exemples de la tâche visée.",
+    "projet": "31 642 produits d'apprentissage (demande → liste + QUID)."
+   },
+   {
+    "terme": "LoRA, PEFT, adaptateur",
+    "definition": "LoRA : on gèle le modèle et on n'entraîne que de petites matrices ajoutées (l'adaptateur, 1,7 % des poids). PEFT : la bibliothèque Hugging Face qui le met en œuvre.",
+    "projet": "Adaptateurs lora_qwen05 (de base) et lora_qwen05_aug (augmenté) ; < 2 h sur Colab T4."
+   },
+   {
+    "terme": "Perte masquée sur le prompt",
+    "definition": "Pendant l'entraînement, l'erreur n'est calculée que sur la réponse : le modèle n'apprend pas à recopier la consigne.",
+    "projet": "« On n'apprend que la réponse » ; perte de validation 1,14 → 0,86."
+   },
+   {
+    "terme": "Hallucination (invention)",
+    "definition": "Le modèle écrit quelque chose qui n'existe pas ; ici, un ingrédient hors du vocabulaire connu.",
+    "projet": "24 % en zero-shot, 0,7 % après LoRA."
+   },
+   {
+    "terme": "Format valide, parseur",
+    "definition": "La réponse doit respecter une syntaxe précise (un ingrédient par ligne, % entre parenthèses) ; le parseur la relit et la rejette sinon.",
+    "projet": "Format valide à 99,5 % après LoRA."
+   },
+   {
+    "terme": "Cahier des charges reconstruit",
+    "definition": "Le cahier des charges d'entraînement est déduit des attributs du produit dans Open Food Facts (vegan, sans lait, sans palme, Nutri-Score…), 0 à 3 critères tirés au hasard.",
+    "projet": "Limite : la vraie recette respecte déjà son cahier → besoin des contrefactuels."
+   },
+   {
+    "terme": "Contrefactuel",
+    "definition": "On impose à un produit réel un critère qu'il ne respecte pas (« sans œufs » sur un brownie aux œufs) : le modèle doit modifier la recette.",
+    "projet": "1 350 cas de test ; seul moyen de voir si le modèle lit vraiment le cahier des charges."
+   },
+   {
+    "terme": "Succès contrefactuel",
+    "definition": "Critère respecté ET recette encore proche de l'originale (F1 ≥ 0,4) : sans la 2ᵉ condition, une réponse absurde « réussirait ».",
+    "projet": "0,18 (RAG 0,5B) → 0,33 (LoRA) → 0,37 (augmenté) ; 0,46 (9B RAG) ; 0,51 (GPT-5.5)."
+   },
+   {
+    "terme": "Vérificateur déterministe",
+    "definition": "Règle écrite à la main qui contrôle une sortie sans IA : allergènes, vegan, huile de palme, additifs, ordre, somme des %.",
+    "projet": "Évalue les modèles, filtre l'augmentation et contrôle chaque proposition du démonstrateur."
+   },
+   {
+    "terme": "LLM-juge",
+    "definition": "Faire noter les réponses par un autre LLM ; pratique mais subjectif et non reproductible.",
+    "projet": "Volontairement non utilisé : on vérifie plutôt que juger."
+   },
+   {
+    "terme": "Ablation",
+    "definition": "Retirer un élément pour mesurer sa contribution, toutes choses égales par ailleurs.",
+    "projet": "Même LoRA entraîné sans cahier des charges : contrefactuels 0,23 au lieu de 0,33."
+   },
+   {
+    "terme": "Test de McNemar",
+    "definition": "Test statistique qui compare deux modèles sur les mêmes cas, en ne regardant que les cas où ils sont en désaccord.",
+    "projet": "Ablation : p ≈ 10⁻¹⁵ ; 9B contre GPT-5.5 : différence non significative."
+   },
+   {
+    "terme": "Bootstrap",
+    "definition": "Rééchantillonner le jeu de test des milliers de fois pour obtenir un intervalle de confiance sur une métrique.",
+    "projet": "Intervalles et écarts entre modèles (LoRA − chaîne supervisée)."
+   },
+   {
+    "terme": "Augmentation ciblée (données synthétiques)",
+    "definition": "Créer de nouveaux exemples d'entraînement là où le modèle échoue ; ici, un grand modèle réécrit des recettes réelles sous un cahier des charges.",
+    "projet": "GPT-5.5 réécrit 2 400 recettes (vegan, sans lait, sans œufs), les vérificateurs en gardent 1 900, ≈ 34 $ ; vegan 8 % → 39 %."
+   },
+   {
+    "terme": "GPU, Colab (T4, L4)",
+    "definition": "Carte graphique qui accélère les calculs des réseaux de neurones ; Google Colab en loue dans le navigateur (T4 gratuite, L4 plus puissante).",
+    "projet": "Entraînement LoRA sur T4 ; Qwen3.5-9B sur L4. Le PC du projet n'a pas de GPU utilisable."
+   },
+   {
+    "terme": "Inférence, rejeu",
+    "definition": "Inférence : utiliser le modèle pour répondre. Rejeu : relire des réponses générées à l'avance au lieu de les recalculer.",
+    "projet": "0,5B en direct sur le CPU (≈ 5 s) ; 9B rejoué (34 demandes générées sur Colab), vérification et solveur en direct."
+   },
+   {
+    "terme": "Démonstrateur (Streamlit)",
+    "definition": "Petite application web locale écrite en Python : on saisit une demande, on voit la liste, les contrôles et la formulation.",
+    "projet": "Écran 20 du site ; trois modèles au choix ; export vers Crumble-AI."
+   }
+  ]
+ }
+]
