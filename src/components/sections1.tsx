@@ -25,17 +25,18 @@ export function Accueil() {
           <Carte num="2" titre="Des contraintes nombreuses">Coût de recette, Nutri-Score, allergènes, allégations (vegan, bio, halal), huile de palme, additifs, doses maximales.</Carte>
           <Carte num="3" titre="Le marché, base d'apprentissage">Chaque étiquette du commerce est une formulation réelle : liste d&apos;ingrédients ordonnée, pourcentages déclarés, nutrition, allégations.</Carte>
         </div>
-        {/* Ordre de grandeur (référentiel Crumble-AI) : ~16 MP équivalentes par catégorie en moyenne sur les recettes → 16^14 ≈ 10^17 ;
-            doser 14 MP au % près = compositions de 100 en 14 parts = C(99,13) ≈ 6·10^15 ; produit ≈ 10^33. */}
+        {/* Ordre de grandeur (référentiel Crumble-AI : 10 MP par recette en médiane) : ~16 MP équivalentes par catégorie en moyenne
+            sur les recettes → 16^10 ≈ 1,1·10^12 ; doser 10 MP au % près = compositions de 100 en 10 parts = C(99,9) ≈ 1,7·10^12 ;
+            produit ≈ 2·10^24. */}
         <div className="mt-3 rounded-2xl border border-line bg-paper px-4 py-3">
           <p className="text-sm font-bold tracking-widest text-amber-deep uppercase">Ordre de grandeur : un espace de recherche faramineux</p>
           <div className="mt-1.5 grid gap-3 sm:grid-cols-3">
             <div><p className="text-2xl font-bold text-navy tabular-nums">≈ 50 attributs</p>
               <p className="text-sm leading-snug text-ink-soft">par matière première : 20 nutriments, 14 allergènes (présent, traces, absent), une quinzaine d&apos;allégations, un coût</p></div>
-            <div><p className="text-2xl font-bold text-blue tabular-nums">≈ 10<sup>17</sup> combinaisons</p>
-              <p className="text-sm leading-snug text-ink-soft">~14 matières premières par produit, chacune à choisir parmi ~16 équivalentes (11 farines, 7 pépites…)</p></div>
-            <div><p className="text-2xl font-bold text-amber tabular-nums">≈ 10<sup>33</sup> recettes</p>
-              <p className="text-sm leading-snug text-ink-soft">en dosant ces 14 matières premières au % près (10<sup>16</sup> façons) — bien plus que les grains de sable de la Terre (~10<sup>19</sup>)</p></div>
+            <div><p className="text-2xl font-bold text-blue tabular-nums">≈ 10<sup>12</sup> combinaisons</p>
+              <p className="text-sm leading-snug text-ink-soft">~10 matières premières par produit, chacune à choisir parmi ~16 équivalentes (11 farines, 7 pépites…)</p></div>
+            <div><p className="text-2xl font-bold text-amber tabular-nums">≈ 10<sup>24</sup> recettes</p>
+              <p className="text-sm leading-snug text-ink-soft">en dosant ces 10 matières premières au % près (10<sup>12</sup> façons) — 100 000 fois plus que les grains de sable de la Terre (~10<sup>19</sup>)</p></div>
           </div>
           <p className="mt-1.5 text-sm font-semibold text-navy">Le formulateur l&apos;explore à la main, quelques itérations à la fois : l&apos;IA propose un point de départ crédible, le calcul vérifie, l&apos;optimisation dose.</p>
         </div>

@@ -2,7 +2,7 @@
  "1": [
   "Problème : page blanche — brief + cahier des charges (« vegan »)",
   "Arbitrer : coût, Nutri-Score, allergènes, allégations",
-  "Ordre de grandeur : ~50 attributs par MP → 10¹⁷ combinaisons de MP, 10³³ recettes",
+  "Ordre de grandeur : ~50 attributs par MP, 10 MP par produit → 10¹² combinaisons, 10²⁴ recettes",
   "Idée : chaque étiquette = une recette réelle → 46 000 produits, 90 000 % déclarés",
   "Un LLM écrit la liste d'ingrédients : petit modèle entraîné → 9B en RAG, face à ChatGPT",
   "Optimisation → matières premières dans Crumble-AI",
