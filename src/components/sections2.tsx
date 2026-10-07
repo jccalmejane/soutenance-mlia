@@ -275,7 +275,15 @@ export function Demo() {
             <p className="mt-1 text-white/70 italic">Brief et cahier des charges saisis en direct → liste du LLM vérifiée → % complétés (modèle 2b, INCO) → solveur → export Crumble-AI</p>
           </div>
         </div>
-        <div className="mt-6 grid gap-4 lg:grid-cols-3">
+        <div className="mt-6 rounded-xl border-l-4 border-amber-bright bg-white/5 p-4 text-[15px] leading-snug text-white/85 ring-1 ring-white/10">
+          <p className="text-lg font-bold text-amber-bright">Ingrédient ≠ matière première</p>
+          <div className="mt-2 grid gap-x-6 gap-y-2 md:grid-cols-2">
+            <p><b className="text-white">Ingrédient</b> : ce que lit l&apos;étiquette — farine de blé, pâte de cacao, lécithine. C&apos;est le niveau d&apos;Open Food Facts, donc le niveau où l&apos;on apprend.</p>
+            <p><b className="text-white">Matière première (MP)</b> : ce que l&apos;entreprise achète — « Pépites de chocolat noir 50 % » (6,20 €/kg) = sucre 49,5 + pâte de cacao 41 + beurre de cacao 9 + lécithine de soja 0,4.</p>
+          </div>
+          <p className="mt-2 font-bold text-white">Le LLM prédit les ingrédients ; l&apos;optimisation choisit les MP : c&apos;est un problème inverse.</p>
+        </div>
+        <div className="mt-4 grid gap-4 lg:grid-cols-3">
           <div className="rounded-xl bg-white/5 p-4 text-sm text-white/85 ring-1 ring-white/10">
             <p className="font-bold text-amber-bright">Tarte aux abricots — vegan</p>
             <p className="mt-2">LoRA de base : abricots 30 %, farine, sucre, <b className="text-white">beurre 12 %, œufs</b>… <span className="font-bold text-red-300">✗ vegan → solveur NON</span></p>

@@ -8,6 +8,8 @@ import notesOrateur from "@/lib/notes.json";
 const AVEC_NOTES = process.env.NOTES_ORATEUR === "1";
 // QR code vers le site en ligne : seulement sur la version projetée (inutile une fois l'auditoire connecté)
 const AVEC_QR = process.env.VERSION_LOCALE === "1";
+// version locale : le sommaire reste ouvert pendant la présentation (fermé seulement par son bouton) ; en ligne, il se referme
+const SOMMAIRE_PERSISTANT = process.env.VERSION_LOCALE === "1";
 /** Adresse du site en ligne, codée dans public/img/qr-site.svg (scripts/qr_site.py). */
 const URL_EN_LIGNE = "soutenance-mlia.vercel.app";
 const notes: Record<string, string | string[]> = AVEC_NOTES ? notesOrateur : {};
@@ -148,7 +150,7 @@ export default function Presentation({ ecrans }: { ecrans: EcranInfo[] }) {
       {sommaire && (
         <div className="fixed top-[4.6rem] right-3 z-40 max-h-[75vh] w-[min(22rem,calc(100vw-1.5rem))] overflow-y-auto sm:right-5 rounded-xl border border-line bg-paper p-2 shadow-lg">
           {ecrans.map((x, k) => (
-            <button key={x.id} onClick={() => { aller(k); setSommaire(false); }}
+            <button key={x.id} onClick={() => { aller(k); if (!SOMMAIRE_PERSISTANT) setSommaire(false); }}
               className={`flex w-full items-baseline gap-3 rounded-lg px-3 py-1.5 text-left text-sm hover:bg-amber-soft ${k === courant ? "bg-amber-soft" : ""}`}>
               <span className="w-7 shrink-0 font-bold text-amber-deep tabular-nums">{x.n}</span>
               <span className="text-ink">{x.titre}</span>

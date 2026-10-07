@@ -32,12 +32,6 @@ export function Accueil() {
             <span className="text-ink-soft">Open Food Facts : sans huile de palme · allergènes œufs, gluten, lait · traces fruits à coque et soja · Nutri-Score E</span>
           </Exemple>
         </div>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          <Chiffre valeur="45 733" legende="produits de boulangerie-pâtisserie (sur 3,9 M dans Open Food Facts)" />
-          <Chiffre valeur="~90 000" legende="pourcentages déclarés (QUID) : la vérité terrain" couleur="amber" />
-          <Chiffre valeur="0,5 → 9 Md" legende="paramètres : Qwen2.5 fine-tuné → Qwen3.5-9B en RAG" couleur="blue" />
-          <Chiffre valeur="0,46 vs 0,51" legende="contrefactuels réussis : 9B en RAG, local, vs ChatGPT" couleur="ok" />
-        </div>
       </div>
     </section>
   );
@@ -55,18 +49,19 @@ export function Cadrage() {
         ["Où il tourne", "PC", "PC, processeur, ≈ 5 s", "GPU de 24 Go (9B) · serveurs d'OpenAI (ChatGPT)"],
         ["Rôle aujourd'hui", "Baselines : voisins (RAG) et chaîne supervisée", "Cœur du projet : léger, local, entraîné", "Repère haut : 0,46 de contrefactuels réussis, contre 0,51 pour ChatGPT et 0,33 pour le petit LoRA"],
       ]} />
-      <div className="mt-5 grid gap-5 lg:grid-cols-[3fr_2fr]">
+      <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <Chiffre valeur="45 733" legende="produits de boulangerie-pâtisserie (sur 3,9 M dans Open Food Facts)" />
+        <Chiffre valeur="~90 000" legende="pourcentages déclarés (QUID) : la vérité terrain" couleur="amber" />
+        <Chiffre valeur="0,5 → 9 Md" legende="paramètres : Qwen2.5 fine-tuné → Qwen3.5-9B en RAG" couleur="blue" />
+        <Chiffre valeur="0,46 vs 0,51" legende="contrefactuels réussis : 9B en RAG, local, vs ChatGPT" couleur="ok" />
+      </div>
+      <div className="mt-5">
         <Carte titre="Pourquoi ces passages ? (propositions de ma référente)">
           <Puces items={[
             "Temps 2 : une seule génération remplace trois modèles, produit directement une étiquette lisible, et le cahier des charges devient une entrée du modèle : on peut mesurer s'il le respecte.",
             "Temps 3 : ChatGPT me battait largement sur les contraintes ; situer le petit modèle face à un modèle ouvert 18 fois plus gros — ce que la taille apporte (les substitutions), ce que l'entraînement apporte (la taxonomie).",
             "Méthodes du module 7 : zero-shot, few-shot, RAG, fine-tuning LoRA, données synthétiques, évaluation par vérification.",
           ]} />
-        </Carte>
-        <Carte titre="Ingrédient ≠ matière première" fond="soft" accent="amber">
-          <p><b>Ingrédient</b> : ce que lit l&apos;étiquette — farine de blé, pâte de cacao, lécithine. C&apos;est le niveau d&apos;Open Food Facts, donc le niveau où l&apos;on apprend.</p>
-          <p className="mt-2"><b>Matière première (MP)</b> : ce que l&apos;entreprise achète — « Pépites de chocolat noir 50 % » (6,20 €/kg) = sucre 49,5 + pâte de cacao 41 + beurre de cacao 9 + lécithine de soja 0,4.</p>
-          <p className="mt-2 font-bold text-navy">Le LLM prédit les ingrédients ; l&apos;optimisation choisit les MP : c&apos;est un problème inverse.</p>
         </Carte>
       </div>
     </Ecran>

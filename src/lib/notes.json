@@ -13,7 +13,7 @@
   "1 · Classique : voisins, puis 3 modèles supervisés (ingrédients, ordre, %)",
   "2 · Petit LLM entraîné (LoRA) : écrit la liste, lit le cahier des charges, tourne sur mon PC",
   "3 · ChatGPT me bat sur les contraintes → 9B ouvert en RAG : presque aussi bon",
-  "Ingrédient (étiquette) ≠ matière première (achat) → problème inverse"
+  "Ordres de grandeur : 45 733 produits, ~90 000 QUID, 0,5 → 9 Md de paramètres, 0,46 vs 0,51 face à ChatGPT"
  ],
  "4": [
   "Exemple : madeleine aux pépites, cahier « vegan »",
@@ -137,6 +137,7 @@
  ],
  "21": [
   "En direct, sur mon PC, sans internet",
+  "Rappel : ingrédient (étiquette) ≠ matière première (achat) → le solveur résout le problème inverse",
   "Tarte aux abricots vegan — modèle de base : beurre + œufs ✗ → solveur NON",
   "Modèle augmenté : protéines de pois + margarine ✓ → oui, 2,84 €/kg",
   "9B : réponses générées sur GPU Colab, rejouées ; vérification et solveur en direct",
