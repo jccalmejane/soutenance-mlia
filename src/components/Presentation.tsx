@@ -85,7 +85,7 @@ export default function Presentation({ ecrans }: { ecrans: EcranInfo[] }) {
           </a>
           <nav className="flex items-center gap-2">
             {/* page Lexique : le lien « Présentation » de la page ramène à l'écran courant */}
-            <a href={`/lexique.html?depuis=${e?.id ?? "accueil"}`} title="Acronymes et définitions du projet"
+            <a href={`/lexique?depuis=${e?.id ?? "accueil"}`} title="Acronymes et définitions du projet"
               onClick={(ev) => {
                 // écran sous la ligne médiane au moment du clic (indépendant de l'observateur de défilement)
                 const milieu = window.innerHeight / 2;
@@ -93,7 +93,7 @@ export default function Presentation({ ecrans }: { ecrans: EcranInfo[] }) {
                   const r = document.getElementById(x.id)?.getBoundingClientRect();
                   return r && r.top <= milieu && r.bottom >= milieu;
                 });
-                if (ici) ev.currentTarget.href = `/lexique.html?depuis=${ici.id}`;
+                if (ici) ev.currentTarget.href = `/lexique?depuis=${ici.id}`;
               }}
               className="rounded-full border border-line bg-paper px-3 py-1.5 text-sm font-semibold text-navy hover:border-amber">
               Lexique
