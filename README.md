@@ -28,6 +28,7 @@ aucune variable d'environnement) et redéploie à chaque `git push` (~2 min).
 - Mettre à jour : modifier, `node_modules\.bin\next build` pour vérifier, puis `git add -A`, `git commit`, `git push`.
 - En ligne, l'écran du démonstrateur affiche une explication à la place du cadre : Streamlit et les modèles ne tournent
   que sur le PC (le site ne sonde `localhost:8501` que s'il est lui-même servi depuis localhost).
-- Notes de l'orateur : exclues du build Vercel (`NOTES_ORATEUR` dans `next.config.ts`), présentes en local.
+- Notes de l'orateur et QR code vers le site en ligne (marge gauche des écrans ≥ 1440 px, touche Q en grand) : exclus du build Vercel (`NOTES_ORATEUR`, `VERSION_LOCALE` dans `next.config.ts`), présents en local. QR régénérable : `scripts/qr_site.py`.
+- Responsive : testé à 375 px (téléphone), aucun défilement horizontal ; tableaux et graphiques défilent dans leur cadre.
 - Le site est masqué des moteurs de recherche (`src/app/robots.ts` + `robots` dans `layout.tsx`) : il se partage par lien.
 - Le jour J, garder le site local (`Lancer la soutenance.bat`) : il marche sans internet et intègre le démonstrateur.

@@ -15,7 +15,7 @@ export function Barres({ titre, categories, series, max, decimales = 2, hauteur 
   return (
     <figure className="rounded-xl border border-line bg-paper p-4">
       <figcaption className="text-sm font-semibold text-navy">{titre}</figcaption>
-      <svg viewBox={`0 0 ${W} ${H}`} className="mt-2 w-full" role="img" aria-label={titre}>
+      <div className="mt-2 overflow-x-auto"><svg viewBox={`0 0 ${W} ${H}`} className="w-full min-w-[520px]" role="img" aria-label={titre}>
         {graduations.map((g) => (
           <g key={g}>
             <line x1={mg.g} x2={W - mg.d} y1={y(g)} y2={y(g)} stroke="#eae2d2" />
@@ -41,7 +41,7 @@ export function Barres({ titre, categories, series, max, decimales = 2, hauteur 
             </g>
           );
         })}
-      </svg>
+      </svg></div>
       <div className="mt-1 flex flex-wrap gap-4 text-[13px] text-ink-soft">
         {series.map((s, k) => (
           <span key={s.nom} className="flex items-center gap-1.5">
@@ -64,7 +64,7 @@ export function Courbes({ titre, series, xmax, ymin, ymax }: {
   return (
     <figure className="rounded-xl border border-line bg-paper p-4">
       <figcaption className="text-sm font-semibold text-navy">{titre}</figcaption>
-      <svg viewBox={`0 0 ${W} ${H}`} className="mt-2 w-full" role="img" aria-label={titre}>
+      <div className="mt-2 overflow-x-auto"><svg viewBox={`0 0 ${W} ${H}`} className="w-full min-w-[520px]" role="img" aria-label={titre}>
         {gy.map((g) => (
           <g key={g}>
             <line x1={mg.g} x2={W - mg.d} y1={y(g)} y2={y(g)} stroke="#eae2d2" />
@@ -81,7 +81,7 @@ export function Courbes({ titre, series, xmax, ymin, ymax }: {
             {s.points.map(([a, b], k) => <circle key={k} cx={x(a)} cy={y(b)} r="3" fill={s.couleur} />)}
           </g>
         ))}
-      </svg>
+      </svg></div>
       <div className="mt-1 flex flex-wrap gap-4 text-[13px] text-ink-soft">
         {series.map((s) => (
           <span key={s.nom} className="flex items-center gap-1.5">

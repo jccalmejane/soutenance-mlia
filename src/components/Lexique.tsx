@@ -35,26 +35,26 @@ export default function Lexique() {
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-30 border-b" style={{ borderColor: "rgba(30,58,120,0.12)", backgroundColor: "#FFFFFF" }}>
-        <div className="mx-auto flex h-[4.25rem] w-full max-w-6xl items-center justify-between gap-4 px-5">
-          <a href={retour} className="flex items-center gap-3">
+        <div className="mx-auto flex h-[4.25rem] w-full max-w-6xl items-center justify-between gap-2 px-3 sm:gap-4 sm:px-5">
+          <a href={retour} className="flex shrink-0 items-center gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/logo-sorbonne-universite.svg" alt="Sorbonne Université" width={114} height={46} className="h-[46px] w-auto" />
+            <img src="/img/logo-sorbonne-universite.svg" alt="Sorbonne Université" width={114} height={46} className="h-9 w-auto sm:h-[46px]" />
             <span className="hidden border-l border-line pl-3 text-sm font-semibold whitespace-nowrap text-ink-soft md:inline">DU MLIA · Lexique du projet</span>
           </a>
-          <div className="flex items-center gap-2">
+          <div className="flex min-w-0 items-center gap-2">
             <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Rechercher un terme…" aria-label="Rechercher un terme"
-              className="w-40 rounded-full border border-line bg-paper px-3 py-1.5 text-sm text-ink outline-none focus:border-amber sm:w-64" />
-            <a href={retour} className="rounded-full bg-gradient-to-r from-amber-bright to-amber px-4 py-1.5 text-sm font-semibold whitespace-nowrap text-navy-deep hover:brightness-105">
-              ← Présentation
+              className="w-full min-w-0 rounded-full border border-line bg-paper px-3 py-1.5 text-sm text-ink outline-none focus:border-amber sm:w-64" />
+            <a href={retour} className="rounded-full bg-gradient-to-r from-amber-bright to-amber px-4 py-1.5 text-sm font-semibold whitespace-nowrap text-navy-deep hover:brightness-105" aria-label="Retour à la présentation">
+              ←<span className="hidden sm:inline"> Présentation</span>
             </a>
           </div>
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
+      <main className="mx-auto w-full max-w-6xl flex-1 px-2 py-4 sm:px-4 sm:py-8">
         <div className={VOILE}>
           <p className="text-xs font-bold tracking-widest text-amber-deep uppercase">Lexique</p>
-          <h1 className="text-3xl font-bold text-navy">Acronymes et définitions</h1>
+          <h1 className="text-2xl font-bold text-navy sm:text-3xl">Acronymes et définitions</h1>
           <p className="mt-1 text-base text-ink-soft italic">
             {q ? `${total} terme${total > 1 ? "s" : ""} pour « ${q} »` : `${total} termes, de l'étiquette au LLM`} — chacun avec une définition en langage courant et son rôle dans le projet
           </p>

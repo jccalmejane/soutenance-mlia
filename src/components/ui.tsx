@@ -1,24 +1,24 @@
 import type { ReactNode } from "react";
 
 /** Voile blanc semi-transparent entre les macarons du fond et le contenu : lisibilité sans masquer l'arrière-plan. */
-export const VOILE = "rounded-3xl bg-white/75 px-6 py-8 shadow-[0_8px_40px_rgba(30,58,120,0.06)] ring-1 ring-white/70 backdrop-blur-[3px] sm:px-9";
+export const VOILE = "rounded-3xl bg-white/75 px-4 py-6 shadow-[0_8px_40px_rgba(30,58,120,0.06)] ring-1 ring-white/70 backdrop-blur-[3px] sm:px-9 sm:py-8";
 
 /** Un écran de présentation : numéro ambre, surtitre, titre bleu nuit, sous-titre (même grammaire que le minisite Crumble). */
 export function Ecran({ id, n, kicker, titre, sous, children, sombre = false }: {
   id: string; n: string; kicker?: string; titre: ReactNode; sous?: ReactNode; children?: ReactNode; sombre?: boolean;
 }) {
   return (
-    <section id={id} data-ecran={n} className={`ecran flex min-h-[calc(100vh-4.25rem)] items-center ${sombre ? "bg-navy-deep" : "px-4"}`}>
-      <div className={`mx-auto w-full max-w-6xl ${sombre ? "px-5 py-12" : `my-8 ${VOILE}`}`}>
-        <div className="flex items-baseline gap-4">
-          <span className={`text-3xl font-bold tabular-nums ${sombre ? "text-amber-bright" : "text-amber"}`}>{n}</span>
+    <section id={id} data-ecran={n} className={`ecran flex min-h-[calc(100vh-4.25rem)] items-center ${sombre ? "bg-navy-deep" : "px-2 sm:px-4"}`}>
+      <div className={`mx-auto w-full max-w-6xl ${sombre ? "px-5 py-12" : `my-4 sm:my-8 ${VOILE}`}`}>
+        <div className="flex items-baseline gap-3 sm:gap-4">
+          <span className={`text-2xl font-bold sm:text-3xl tabular-nums ${sombre ? "text-amber-bright" : "text-amber"}`}>{n}</span>
           <div>
             {kicker && <p className="text-xs font-bold tracking-widest text-amber-deep uppercase">{kicker}</p>}
             <h2 className={`text-2xl font-bold sm:text-3xl [text-wrap:balance] ${sombre ? "text-white" : "text-navy"}`}>{titre}</h2>
             {sous && <p className={`mt-1 text-base italic ${sombre ? "text-white/70" : "text-ink-soft"}`}>{sous}</p>}
           </div>
         </div>
-        <div className="mt-7">{children}</div>
+        <div className="mt-5 sm:mt-7">{children}</div>
       </div>
     </section>
   );
@@ -30,7 +30,7 @@ export function Carte({ titre, children, num, accent = "navy", fond = "paper", c
 }) {
   const couleur = { navy: "text-navy", amber: "text-amber-deep", ok: "text-ok", ko: "text-ko", blue: "text-blue" }[accent];
   return (
-    <div className={`rounded-2xl border border-line p-5 ${fond === "soft" ? "bg-amber-soft/60" : "bg-paper"} ${className}`}>
+    <div className={`rounded-2xl border border-line p-4 sm:p-5 ${fond === "soft" ? "bg-amber-soft/60" : "bg-paper"} ${className}`}>
       {titre && (
         <h3 className={`flex items-baseline gap-2 text-lg font-bold ${couleur}`}>
           {num && <span className="text-sm font-bold text-amber-deep tabular-nums">{num}</span>}
@@ -68,7 +68,7 @@ export function Chiffre({ valeur, legende, couleur = "navy" }: { valeur: ReactNo
 /** Encadré « exemple réel » : bordure ambre, comme les citations du minisite. */
 export function Exemple({ titre, children, mono = false }: { titre?: ReactNode; children: ReactNode; mono?: boolean }) {
   return (
-    <div className="border-l-4 border-amber bg-amber-soft/60 px-5 py-4">
+    <div className="border-l-4 border-amber bg-amber-soft/60 px-4 py-4 sm:px-5">
       {titre && <p className="text-xs font-bold tracking-widest text-amber-deep uppercase">{titre}</p>}
       <div className={`${titre ? "mt-2" : ""} ${mono ? "font-mono text-[13px] leading-relaxed" : "text-[15px] leading-snug"} text-ink`}>
         {children}

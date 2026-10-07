@@ -38,6 +38,16 @@ body {
   font-family: var(--font-sans);
 }
 
+/* téléphone : jamais de défilement horizontal de la page ; un élément de grille peut rétrécir sous la largeur de son
+   contenu (sinon un tableau large élargit la grille au lieu de défiler dans son propre cadre) */
+html,
+body {
+  overflow-x: clip;
+}
+.ecran .grid > * {
+  min-width: 0;
+}
+
 /* une section = un « écran » de présentation */
 .ecran {
   scroll-margin-top: 4.25rem;
