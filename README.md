@@ -9,7 +9,7 @@ Double-clic sur `demo/lancer_soutenance.bat` (ou « Lancer la soutenance.bat » 
 (fichiers statiques de `site/out`, port 3030), puis ouvre http://localhost:3030. Aucun besoin de Node ni d'internet.
 
 Clavier : ← → (ou Page, Espace) écran par écran · Début / Fin · **N** notes de l'orateur · **F** plein écran.
-Le bouton « Démonstrateur » et l'écran 21 intègrent l'interface Streamlit ; cliquer hors du cadre pour
+Le bouton « Démonstrateur » et l'écran 20 intègrent l'interface Streamlit ; cliquer hors du cadre pour
 reprendre la navigation au clavier.
 
 ## Modifier le contenu
@@ -19,7 +19,7 @@ reprendre la navigation au clavier.
 - Reconstruire : `cd site` puis `node_modules\.bin\next build` (régénère `site/out`).
 - Développement : `node_modules\.bin\next dev -p 3030`.
 
-> Écran 03 (cadrage en trois temps : classique, petit LLM, grand LLM en RAG face à ChatGPT — 05/10) : le texte du site et sa note dans `src/lib/notes.json` sont plus récents que la slide 3 du PowerPoint et que `slides/notes_soutenance.py` ; ne pas ré-exporter notes.json sans reporter cette note.
+> Écran 02 (cadrage en trois temps : classique, petit LLM, grand LLM en RAG face à ChatGPT — 05/10) : le texte du site et sa note dans `src/lib/notes.json` sont plus récents que la slide 3 du PowerPoint et que `slides/notes_soutenance.py` ; ne pas ré-exporter notes.json sans reporter cette note.
 
 ## En ligne (Vercel, même méthode que le site de l'Union, `UnionRL-www/DEPLOIEMENT.md`)
 

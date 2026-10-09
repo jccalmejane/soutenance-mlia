@@ -144,7 +144,7 @@ export function GrandsModeles() {
             "Sans voisins, le 9B ne connaît pas la taxonomie (F1 0,34) ; avec les 5 voisins, il rejoint le haut du tableau (0,45).",
             "Le 9B ouvert approche GPT-5.5 sur les contraintes (0,46 contre 0,51, écart non significatif) et bat le petit LoRA (+0,13, p ≈ 3·10⁻⁵).",
             "Les substitutions viennent de la taille du modèle ; la taxonomie vient du fine-tuning ou des voisins.",
-            "Le 9B tient sur une GPU de 24 Go : pas de coût par requête, pas de recette envoyée à un tiers.",
+            "Le 9B tient sur un GPU de 24 Go : pas de coût par requête, pas de recette envoyée à un tiers.",
             <b key="s" className="text-navy">Et si le grand modèle enseignait les substitutions au petit ? → écran suivant</b>,
           ]} />
         </div>

@@ -92,6 +92,7 @@ export default function Presentation({ ecrans }: { ecrans: EcranInfo[] }) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/img/logo-sorbonne-universite.svg" alt="Sorbonne Université" width={114} height={46} className="h-9 w-auto sm:h-[46px]" />
             <span className="hidden border-l border-line pl-3 text-sm font-semibold whitespace-nowrap text-ink-soft lg:inline">DU MLIA · Projet de fin d&apos;études</span>
+            <span className="hidden border-l border-line pl-3 text-sm whitespace-nowrap text-ink-soft lg:inline">Jean-Christophe Calmejane</span>
           </a>
           <nav className="flex items-center gap-1.5 sm:gap-2">
             {/* page Lexique : le lien « Présentation » de la page ramène à l'écran courant */}

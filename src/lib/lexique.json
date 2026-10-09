@@ -119,7 +119,7 @@
    },
    {
     "terme": "Cahier des charges",
-    "definition": "Les exigences du produit à développer : cibles nutritionnelles, Nutri-Score visé, allégations (bio, Halal…), ingrédients interdits, coût, chaque critère pondéré de « pas important » à « obligatoire ».",
+    "definition": "Les exigences du produit à développer : cibles nutritionnelles, Nutri-Score visé, allégations (bio, halal…), ingrédients interdits, coût, chaque critère pondéré de « pas important » à « obligatoire ».",
     "projet": "Contraintes et objectif de l'étape 3 (problème inverse) et de l'optimisation dans Mon PLM."
    },
    {
@@ -149,7 +149,7 @@
    },
    {
     "terme": "Recette (nomenclature, BOM)",
-    "definition": "La liste des MP (ou articles) et de leurs quantités pour un lot ; « recette » (bill of materials) est le terme des PLM et ERP, « recette » celui du formulateur — on dit recette.",
+    "definition": "La liste des MP (ou articles) et de leurs quantités pour un lot ; « nomenclature » (bill of materials) est le terme des PLM et ERP, « recette » celui du formulateur — on dit recette.",
     "projet": "Jeu de validation de l'étape 3 (retrouve-t-on la recette réelle à partir de son étiquette ?)."
    },
    {
@@ -290,7 +290,7 @@
    {
     "terme": "Notebook Jupyter",
     "definition": "Document mêlant texte, code Python et résultats, exécutable d'une traite (« Restart & Run All »).",
-    "projet": "Livrables : 01 (données, modèle 1), 02 (modèle 2), 03 (problème inverse, à venir)."
+    "projet": "Livrables : 01 (données, modèle 1), 02 (modèle 2), 03 (problème inverse), 04 (fine-tuning LoRA), 05 (augmentation ciblée, Qwen3.5-9B), 06 (démonstrateur)."
    },
    {
     "terme": "Graine aléatoire (seed)",
@@ -489,8 +489,8 @@
    },
    {
     "terme": "Plafond naturel",
-    "definition": "Niveau de performance qu'aucun modèle ne peut dépasser parce que l'entrée ne contient pas l'information : deux produits de même nom ne partagent leurs ingrédients qu'à F1 ≈ 0,62.",
-    "projet": "Référence pour lire le 0,57 du modèle 1."
+    "definition": "Niveau de performance qu'aucun modèle ne peut dépasser parce que l'entrée ne contient pas l'information : deux produits de même nom ne partagent leurs ingrédients qu'à F1 0,58 (0,62 sur le vocabulaire de 150 ingrédients du modèle 1).",
+    "projet": "Référence pour lire le 0,57 du modèle 1 et le 0,43 du LLM."
    },
    {
     "terme": "MAE (erreur absolue moyenne)",
@@ -540,7 +540,7 @@
    {
     "terme": "k-means",
     "definition": "Partitionner les points en k groupes autour de centres, en minimisant les distances intra-groupe.",
-    "projet": "Six profils de recette (chocolatés, pur beurre, barres protéinées, pain d'épices, viennoiseries, industriels)."
+    "projet": "Six profils de recette (cakes industriels, barres avoine / protéines, biscuits pur beurre, pain d'épices et meringués, viennoiseries, biscuits industriels)."
    },
    {
     "terme": "t-SNE",
@@ -614,18 +614,18 @@
    },
    {
     "terme": "Solveur du projet vs moteur de Mon PLM",
-    "definition": "Le solveur du projet (src/crumble.py, fonction resoudre) répond à « avec quelles MP et en quelle quantité ? » : programme quadratique convexe sur le référentiel, guidé par la prédiction apprise et le cahier des charges ; il produit un prototype et un verdict. Le moteur de Mon PLM (déjà opérationnel) recalcule ensuite nutrition, allergènes, étiquette INCO, Nutri-Score et coût sur la recette chargée, et optimise les quantités selon les règles de l'entreprise : son calcul fait foi.",
+    "definition": "Le solveur du projet (fonction resoudre) répond à « avec quelles MP et en quelle quantité ? » : programme quadratique convexe sur le référentiel, guidé par la prédiction apprise et le cahier des charges ; il produit un prototype et un verdict. Le moteur de Mon PLM (déjà opérationnel) recalcule ensuite nutrition, allergènes, étiquette INCO, Nutri-Score et coût sur la recette chargée, et optimise les quantités selon les règles de l'entreprise : son calcul fait foi.",
     "projet": "Étape 3 = solveur du projet ; étape 4 = moteur de Mon PLM. Le recouvrement (contraintes Nutri-Score dans le solveur) est voulu : le choix des MP et le Nutri-Score ne sont pas séparables."
    },
    {
     "terme": "Classe de composition / MP interchangeables",
-    "definition": "Ensemble de MP ayant exactement la même composition en ingrédients (huit farines de blé : T45, T55, bio, halal…) : indiscernables sur l'étiquette, différentes par le coût, la certification, l'origine.",
+    "definition": "Ensemble de MP ayant exactement la même composition en ingrédients (onze farines de blé : T45, T55, T65, bio, halal, gruau…) : indiscernables sur l'étiquette, différentes par le coût, la certification, l'origine.",
     "projet": "39 classes dans le référentiel ; le solveur fusionne les équivalentes sur la moins chère et les rend comme « alternatives »."
    },
    {
     "terme": "Composite visé",
     "definition": "MP composite explicitement appelée par la prédiction ou par l'étiquette (« pépites de chocolat ») ; le solveur la préfère à sa reconstitution à partir de ses ingrédients.",
-    "projet": "Bonus linéaire dans l'objectif ; fait passer la précision des MP retrouvées de 0,83 à 0,94."
+    "projet": "Bonus linéaire dans l'objectif ; fait passer la précision des MP retrouvées de 0,83 à 0,95."
    },
    {
     "terme": "Candidates",
@@ -650,7 +650,7 @@
    {
     "terme": "Faisabilité",
     "definition": "Verdict du solveur : un cahier des charges est infaisable quand plus de 5 % de la cible n'a aucune MP admissible ou quand la recette s'éloigne trop de la cible.",
-    "projet": "Halal certifié (pas de cacao certifié), sans soja strict (traces sur les farines) → « NON », motivé."
+    "projet": "Halal certifié (pas d'huile, de sel ni de poudre à lever certifiés), sans soja strict (traces sur les farines) → « NON », motivé."
    },
    {
     "terme": "Bout en bout",
@@ -659,7 +659,7 @@
    },
    {
     "terme": "Payload de chargement",
-    "definition": "Fichier JSON au format attendu par le chargement dans Mon PLM : recette (recette en kg de lot, perte en eau par composant) + produit fini, avec les références dev des MP.",
+    "definition": "Fichier JSON au format attendu par le chargement dans Mon PLM : nomenclature (recette en kg de lot, perte en eau par composant) + produit fini, avec les références dev des MP.",
     "projet": "Export des formulations proposées (REC-91001…) : Mon PLM recalcule et fait foi."
    },
    {
@@ -735,11 +735,11 @@
    {
     "terme": "Hallucination (invention)",
     "definition": "Le modèle écrit quelque chose qui n'existe pas ; ici, un ingrédient hors du vocabulaire connu.",
-    "projet": "24 % en zero-shot, 0,7 % après LoRA."
+    "projet": "26 % en zero-shot, 0,7 % après LoRA."
    },
    {
     "terme": "Format valide, parseur",
-    "definition": "La réponse doit respecter une syntaxe précise (un ingrédient par ligne, % entre parenthèses) ; le parseur la relit et la rejette sinon.",
+    "definition": "La réponse doit respecter une syntaxe précise (ingrédients séparés par « | », dans l'ordre décroissant, le % accolé à l'ingrédient quand il est déclaré) ; le parseur la relit et la rejette sinon.",
     "projet": "Format valide à 99,5 % après LoRA."
    },
    {

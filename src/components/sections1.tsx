@@ -12,7 +12,7 @@ export function Accueil() {
         <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
           <span className="text-3xl font-bold text-amber tabular-nums">01</span>
           <p className="text-sm font-bold tracking-widest text-amber-deep uppercase">Projet de fin d&apos;études · DU Machine Learning et IA · Sorbonne Université</p>
-          <p className="ml-auto text-sm text-ink-soft">Jean Calmejane · octobre 2026 · encadrement : Syrielle Montariol</p>
+          <p className="ml-auto text-sm text-ink-soft">Jean-Christophe Calmejane · octobre 2026 · encadrement : Syrielle Montariol</p>
         </div>
         <h1 className="mt-2 max-w-4xl text-4xl font-bold text-navy sm:text-[2.6rem] sm:leading-tight [text-wrap:balance]">Assistant de formulation prédictive pour l&apos;alimentaire</h1>
         <p className="mt-2 max-w-4xl text-base text-ink-soft">
@@ -71,7 +71,7 @@ export function Cadrage() {
         <Chiffre valeur="0,46 vs 0,51" legende="contrefactuels réussis : 9B en RAG, local, vs ChatGPT" couleur="ok" />
       </div>
       <div className="mt-5">
-        <Carte titre="Pourquoi ces passages ? (propositions de ma référente)">
+        <Carte titre="Pourquoi ces passages ? (propositions de ma référente, Syrielle Montariol)">
           <Puces items={[
             "Temps 2 : une seule génération remplace trois modèles, produit directement une étiquette lisible, et le cahier des charges devient une entrée du modèle : on peut mesurer s'il le respecte.",
             "Temps 3 : ChatGPT me battait largement sur les contraintes ; situer le petit modèle face à un modèle ouvert 18 fois plus gros — ce que la taille apporte (les substitutions), ce que l'entraînement apporte (la taxonomie).",
@@ -88,7 +88,7 @@ export function Chaine() {
     ["1", "Générer", "LLM LoRA : brief + cahier des charges → liste ordonnée + QUID", "« Madeleine aux pépites de chocolat » + cahier des charges « vegan » → farine de blé 27 %, huile de colza, sucre, pépites de chocolat 13 %, protéines de pois 12 %…"],
     ["2", "Contrôler", "Règles INCO : ordre, somme, QUID ; vérification du cahier des charges", "% décroissants ✓ · somme ≤ 105 ✓ · vegan ✓ : ni beurre, ni œufs, ni lait"],
     ["3", "Bilan d'eau", "Étiquette (100 g fini) → pâte : la matière sèche est conservée", "eau ajoutée 10 % de la pâte · rendement de cuisson 90 %"],
-    ["4", "Matières premières", "Solveur du projet : programme quadratique, MP vegan seulement", "Farine T55 23,1 % · colza 15,1 % · sucre 15,1 % · pépites 50 % 11,2 % · isolat de pois 10,3 %…"],
+    ["4", "Matières premières", "Solveur du projet : programme quadratique, MP vegan seulement", "Farine T55 23,1 % · colza 15,1 % · sucre 15,1 % · pépites (chocolat 50 %) 11,2 % · isolat de pois 10,3 %…"],
     ["5", "Calculer", "Moteur de Mon PLM : nutrition, coût, Nutri-Score, étiquette — son calcul fait foi", "2,48 €/kg · Nutri-Score E (23) · allergènes : gluten, soja"],
   ];
   return (
@@ -119,7 +119,7 @@ export function Donnees() {
       <div className="grid gap-4 md:grid-cols-3">
         <Carte titre="Open Food Facts" accent="blue"><Puces items={[
           "Dump Parquet 7,9 Go filtré avec DuckDB.",
-          "49 838 produits, 1,16 M lignes d'ingrédients, ~90 000 QUID.",
+          "49 838 produits extraits, 45 733 retenus pour l'apprentissage, la validation et le test ; 1,16 M lignes d'ingrédients, ~90 000 QUID.",
           "Découpage par nom : 31 642 / 4 488 / 9 603 (apprentissage / validation / test), aucun nom du test vu à l'apprentissage.",
         ]} /></Carte>
         <Carte titre="Mon PLM (référentiel)" accent="amber"><Puces items={[
@@ -241,7 +241,7 @@ export function Lora() {
       <div className="grid gap-5 lg:grid-cols-2">
         <div className="flex flex-col gap-4">
           <Carte titre="La recette (cours module 7)" accent="blue"><Puces items={[
-            "Qwen2.5-0.5B puis 1,5B-Instruct, format chat.",
+            "Qwen2.5-0.5B-Instruct puis 1.5B-Instruct, format chat.",
             "LoRA r = 16 sur l'attention et le MLP : 8,8 M paramètres entraînés (1,7 %) pour le 0,5B.",
             "Perte calculée sur la réponse seulement (le prompt est masqué).",
             "2 époques, lr 2·10⁻⁴, sélection sur la perte de validation.",

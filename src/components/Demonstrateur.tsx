@@ -74,7 +74,7 @@ export default function Demonstrateur() {
         <p className="max-w-2xl text-white/80">
           Le démonstrateur tourne sur le PC du présentateur, sans internet : Qwen2.5-0.5B + LoRA sur le processeur, réponses du
           Qwen3.5-9B rejouées, vérificateurs, solveur et export vers Mon PLM. Aucune recette n&apos;est envoyée en ligne ; il est
-          montré en direct pendant la soutenance.
+          présenté en direct lors de la soutenance.
         </p>
       </div>
     );

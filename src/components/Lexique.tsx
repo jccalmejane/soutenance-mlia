@@ -89,8 +89,8 @@ export default function Lexique() {
 
       <footer className="border-t border-line bg-cream">
         <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-2 px-5 py-6 text-sm text-ink-soft">
-          <span>Jean Calmejane — DU MLIA, Sorbonne Université · octobre 2026</span>
-          <span>Même contenu que « Lexique - Assistant de Formulation Prédictive.pdf »</span>
+          <span>Jean-Christophe Calmejane — DU MLIA, Sorbonne Université · octobre 2026</span>
+          <span>Données : Open Food Facts (ODbL), CIQUAL 2020, référentiel de Mon PLM</span>
         </div>
       </footer>
     </div>
