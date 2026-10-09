@@ -33,8 +33,8 @@ export function Limites() {
           "Diversifier les substitutions générées (amidon, farine de soja, graines de lin…) et étendre l'augmentation aux autres critères.",
           "Fine-tuner le Qwen3.5-9B en QLoRA sur une L4 : taxonomie et substitutions dans un seul modèle ouvert.",
           "Combiner fine-tuning et RAG : donner au modèle fine-tuné les recettes voisines.",
-          "Intégrer le démonstrateur dans Crumble-AI et y vérifier le Nutri-Score par son propre calcul.",
-          "Apprendre des formulations validées par les utilisateurs de Crumble-AI ; étendre à d'autres familles et à la cosmétique.",
+          "Intégrer le démonstrateur dans Mon PLM et y vérifier le Nutri-Score par son propre calcul.",
+          "Apprendre des formulations validées par les utilisateurs de Mon PLM ; étendre à d'autres familles et à la cosmétique.",
         ]} /></Carte>
       </div>
     </Ecran>
@@ -52,7 +52,7 @@ export function Conclusion() {
             "Le marché est une base d'apprentissage : 46 000 étiquettes et des règles d'étiquetage qui sont des contraintes exactes.",
             "Un petit LLM fine-tuné en LoRA, en deux heures sur un GPU gratuit, écrit des listes d'ingrédients crédibles et lit le cahier des charges — l'ablation le prouve ; un grand modèle peut lui enseigner les substitutions (vegan 0,08 → 0,39).",
             "Une évaluation sans juge : vérificateurs, contrefactuels, comparaisons appariées ; la chaîne supervisée, Qwen3.5-9B et GPT-5.5 comme repères honnêtes.",
-            "Une optimisation qui traduit en matières premières et explique chaque choix, dans Crumble-AI qui recalcule et fait foi.",
+            "Une optimisation qui traduit en matières premières et explique chaque choix, dans Mon PLM qui recalcule et fait foi.",
           ].map((t) => (
             <li key={t} className="flex gap-3"><span aria-hidden className="mt-3 size-2 shrink-0 rounded-full bg-amber" />{t}</li>
           ))}
@@ -144,7 +144,7 @@ export function Annexes() {
         </div>
         <Puces className="mt-6" items={[
           "Un QUID s'exprime sur le produit fini après perte au four : la somme des ingrédients mis en œuvre peut dépasser 100.",
-          "Le solveur travaille en base pâte, avec l'eau comme matière première ; Crumble-AI recalcule l'étiquette en base produit fini.",
+          "Le solveur travaille en base pâte, avec l'eau comme matière première ; Mon PLM recalcule l'étiquette en base produit fini.",
           "Dans le démonstrateur, l'eau ajoutée calculée par le bilan fait partie de la cible du solveur (tartes, crêpes : 20 à 40 % de la pâte).",
         ]} />
       </Ecran>
@@ -154,10 +154,10 @@ export function Annexes() {
           <Chiffre valeur="46 316" legende="produits Open Food Facts recalculés" />
           <Chiffre valeur="98,9 %" legende="lettres identiques à OFF" couleur="ok" />
           <Chiffre valeur="99,4 %" legende="scores à ± 1 point" couleur="ok" />
-          <Chiffre valeur="98 %" legende="lettres identiques sur les 50 produits Crumble-AI" couleur="ok" />
+          <Chiffre valeur="98 %" legende="lettres identiques sur les 50 produits de Mon PLM" couleur="ok" />
         </div>
         <div className="mt-5">
-          <Carte titre="Spécification Crumble-AI, algorithme 2023" fond="soft">
+          <Carte titre="Spécification de Mon PLM, algorithme 2023" fond="soft">
             <p>Consolidation de recette (rendement, bilan d&apos;eau), points défavorables et favorables, règle des protéines (comptées seulement si les points défavorables sont sous 11), catégories ; seuils suivants pour chaque composante.</p>
             <p className="mt-2 italic">« Le calcul est une fonction pure des lignes MP, du rendement et de la catégorie ; aucun appel LLM. » Le Nutri-Score entre dans le solveur comme contrainte, pas comme cible d&apos;apprentissage : moins de points, meilleure lettre.</p>
           </Carte>

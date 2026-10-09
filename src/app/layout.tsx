@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Assistant de formulation prédictive — soutenance",
   description:
-    "Un petit LLM fine-tuné écrit la liste d'ingrédients à partir du brief et du cahier des charges ; une optimisation la traduit en matières premières dans Crumble-AI. DU MLIA, Sorbonne Université.",
+    "Un petit LLM fine-tuné écrit la liste d'ingrédients à partir du brief et du cahier des charges ; une optimisation la traduit en matières premières dans Mon PLM. DU MLIA, Sorbonne Université.",
   robots: { index: false, follow: false }, // version en ligne : partagée par lien, pas indexée
 };
 

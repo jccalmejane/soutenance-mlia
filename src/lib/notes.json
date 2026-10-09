@@ -5,7 +5,7 @@
   "Ordre de grandeur : ~50 attributs par MP, 10 MP par produit → 10¹² combinaisons, 10²⁴ recettes",
   "Idée : chaque étiquette = une recette réelle → 46 000 produits, 90 000 % déclarés",
   "Un LLM écrit la liste d'ingrédients : petit modèle entraîné → 9B en RAG, face à ChatGPT",
-  "Optimisation → matières premières dans Crumble-AI",
+  "Optimisation → matières premières dans Mon PLM",
   "Objectif : un premier prototype ; le formulateur décide"
  ],
  "3": [
@@ -21,13 +21,13 @@
   "2 Contrôler : ordre, somme, vegan ✓",
   "3 Bilan d'eau : étiquette → pâte",
   "4 Solveur : matières premières vegan uniquement",
-  "5 Crumble-AI recalcule : 2,48 €/kg, Nutri-Score E",
+  "5 Mon PLM recalcule : 2,48 €/kg, Nutri-Score E",
   "Principe : on apprend l'incertain, on calcule l'exact"
  ],
  "5": [
   "Open Food Facts : 7,9 Go, DuckDB → 49 838 produits, 90 000 QUID",
   "Découpage par nom : aucun nom du test vu à l'apprentissage",
-  "Crumble-AI : 281 MP, 50 produits finis (coût, nutrition, allergènes)",
+  "Mon PLM : 281 MP, 50 produits finis (coût, nutrition, allergènes)",
   "CIQUAL : nutrition et eau des ingrédients",
   "85 % de la catégorie en Nutri-Score D ou E",
   "Même nom, deux recettes (madeleines coquilles : beurre / huile)"
@@ -141,7 +141,7 @@
   "Tarte aux abricots vegan — modèle de base : beurre + œufs ✗ → solveur NON",
   "Modèle augmenté : protéines de pois + margarine ✓ → oui, 2,84 €/kg",
   "9B : réponses générées sur GPU Colab, rejouées ; vérification et solveur en direct",
-  "Export Crumble-AI, qui recalcule"
+  "Export vers Mon PLM, qui recalcule"
  ],
  "22": [
   "Big Data : DuckDB, 7,9 Go",
@@ -155,13 +155,13 @@
   "Vegan : mieux grâce à l'augmentation, sous ChatGPT, tic protéine de pois",
   "Vérificateurs : caramel au beurre salé passé (2 / 126)",
   "Cahier des charges reconstruit ; référentiel petit",
-  "Suite : substituts variés, entraîner le 9B, intégrer dans Crumble-AI"
+  "Suite : substituts variés, entraîner le 9B, intégrer dans Mon PLM"
  ],
  "24": [
   "Le marché = base d'apprentissage (étiquettes + réglementation)",
   "Petit LLM, 2 h : listes crédibles + lit le cahier ; un grand modèle lui apprend les substitutions",
   "Évaluation sans juge ; repères : chaîne supervisée, 9B, ChatGPT",
-  "Optimisation → matières premières dans Crumble-AI, qui recalcule",
+  "Optimisation → matières premières dans Mon PLM, qui recalcule",
   "Le modèle propose, le calcul vérifie, l'optimisation arbitre, le formulateur décide — merci"
  ],
  "25": [

@@ -235,7 +235,7 @@ export function ProblemeInverse() {
         ]} /></Carte>
       </div>
       <div className="mt-5">
-        <Tableau entetes={["Validation sur les 50 produits Crumble-AI", "Précision MP", "Rappel MP", "Masse mal placée", "Lettre Nutri-Score identique"]} lignes={[
+        <Tableau entetes={["Validation sur les 50 produits de Mon PLM", "Précision MP", "Rappel MP", "Masse mal placée", "Lettre Nutri-Score identique"]} lignes={[
           ["1. Recette visée exacte, solveur aveugle", "0,83", "0,87", "7,6 %", "96 %"],
           ["2. + composites lus sur l'étiquette", "0,95", "0,95", "0,5 %", "98 %"],
           ["3. Bout en bout depuis le seul nom (chaîne supervisée)", "0,45", "0,54", "25 %", "70 %"],
@@ -271,8 +271,8 @@ export function Demo() {
           <span className="text-3xl font-bold text-amber-bright tabular-nums">20</span>
           <div>
             <p className="text-xs font-bold tracking-widest text-amber-bright uppercase">Démonstration en direct</p>
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">Du brief à Crumble-AI, par le LLM</h2>
-            <p className="mt-1 text-white/70 italic">Brief et cahier des charges saisis en direct → liste du LLM vérifiée → % complétés (modèle 2b, INCO) → solveur → export Crumble-AI</p>
+            <h2 className="text-2xl font-bold text-white sm:text-3xl">Du brief à Mon PLM, par le LLM</h2>
+            <p className="mt-1 text-white/70 italic">Brief et cahier des charges saisis en direct → liste du LLM vérifiée → % complétés (modèle 2b, INCO) → solveur → export vers Mon PLM</p>
           </div>
         </div>
         <div className="mt-6 rounded-xl border-l-4 border-amber-bright bg-white/5 p-4 text-[15px] leading-snug text-white/85 ring-1 ring-white/10">

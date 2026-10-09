@@ -120,22 +120,22 @@
    {
     "terme": "Cahier des charges",
     "definition": "Les exigences du produit à développer : cibles nutritionnelles, Nutri-Score visé, allégations (bio, Halal…), ingrédients interdits, coût, chaque critère pondéré de « pas important » à « obligatoire ».",
-    "projet": "Contraintes et objectif de l'étape 3 (problème inverse) et de l'optimisation dans Crumble-AI."
+    "projet": "Contraintes et objectif de l'étape 3 (problème inverse) et de l'optimisation dans Mon PLM."
    },
    {
     "terme": "Ingrédient (ING)",
-    "definition": "Ce que l'on lit sur l'étiquette : farine de blé, sucre, pâte de cacao, lécithine de soja. Codifié ING-… dans Crumble-AI.",
+    "definition": "Ce que l'on lit sur l'étiquette : farine de blé, sucre, pâte de cacao, lécithine de soja. Codifié ING-… dans Mon PLM.",
     "projet": "Niveau auquel Open Food Facts décrit les produits, donc niveau auquel on apprend (modèles 1 et 2)."
    },
    {
     "terme": "Matière première (MP, RM)",
-    "definition": "L'objet que l'entreprise achète et met en œuvre : elle porte une composition en ingrédients (g/100 g), une nutrition, des allergènes, un coût, des certifications. Codifiée RM-… dans Crumble-AI.",
-    "projet": "Niveau auquel Crumble-AI formule ; cible du post-traitement (étape 3)."
+    "definition": "L'objet que l'entreprise achète et met en œuvre : elle porte une composition en ingrédients (g/100 g), une nutrition, des allergènes, un coût, des certifications. Codifiée RM-… dans Mon PLM.",
+    "projet": "Niveau auquel Mon PLM formule ; cible du post-traitement (étape 3)."
    },
    {
     "terme": "Article fournisseur / MP générique",
     "definition": "Deux types de MP : la générique est l'objet de formulation (« pépites de chocolat noir 60 % »), l'article fournisseur est la référence achetée chez un fournisseur donné (RM-31054-A1, Barry Callebaut), avec son prix et ses documents.",
-    "projet": "Les recette Crumble-AI référencent des articles fournisseur ; le solveur choisit parmi eux."
+    "projet": "Les recettes de Mon PLM référencent des articles fournisseur ; le solveur choisit parmi eux."
    },
    {
     "terme": "Composite",
@@ -145,7 +145,7 @@
    {
     "terme": "Composition aplatie",
     "definition": "La liste d'ingrédients obtenue en remplaçant chaque MP d'une recette par sa composition, pondérée par sa quantité, puis en regroupant les ingrédients identiques (le sucre des pépites s'ajoute au sucre de la recette).",
-    "projet": "Ce que l'étiquette générée par Crumble-AI affiche ; ce que le problème inverse doit reproduire."
+    "projet": "Ce que l'étiquette générée par Mon PLM affiche ; ce que le problème inverse doit reproduire."
    },
    {
     "terme": "Recette (nomenclature, BOM)",
@@ -154,7 +154,7 @@
    },
    {
     "terme": "PLM",
-    "definition": "Product Lifecycle Management : logiciel de gestion du cycle de vie des produits (recettes, matières, étiquetage, conformité). Crumble-AI en est un, « IA-natif », pour l'agroalimentaire.",
+    "definition": "Product Lifecycle Management : logiciel de gestion du cycle de vie des produits (recettes, matières, étiquetage, conformité). Mon PLM en est un, « IA-natif », pour l'agroalimentaire.",
     "projet": "Cadre du projet ; le moteur de calcul (nutrition, Nutri-Score, coût) et l'optimisation sous contraintes y sont déjà opérationnels."
    },
    {
@@ -205,7 +205,7 @@
    {
     "terme": "Rendement massique",
     "definition": "Masse de produit fini divisée par la masse de pâte mise en œuvre (une madeleine : ≈ 90–97 %). La perte est de l'eau.",
-    "projet": "Calculé par le bilan de matière sèche ; paramètre des recettes Crumble-AI."
+    "projet": "Calculé par le bilan de matière sèche ; paramètre des recettes de Mon PLM."
    },
    {
     "terme": "Humidité, matière sèche",
@@ -235,7 +235,7 @@
    {
     "terme": "Dénomination INCO",
     "definition": "La liste d'ingrédients réglementaire générée à partir de la composition aplatie, dans l'ordre décroissant, avec les allergènes en évidence et les QUID.",
-    "projet": "Sortie de Crumble-AI ; cible que le problème inverse doit rendre semblable à celles du marché."
+    "projet": "Sortie de Mon PLM ; cible que le problème inverse doit rendre semblable à celles du marché."
    }
   ]
  },
@@ -255,7 +255,7 @@
    {
     "terme": "off_tag",
     "definition": "Identifiant normalisé d'un ingrédient dans la taxonomie Open Food Facts (en:wheat-flour, en:dark-chocolate) : toutes les graphies et langues d'une même étiquette y sont rattachées. Le préfixe en: indique un identifiant canonique anglais ; un ingrédient non reconnu garde sa langue (fr:…).",
-    "projet": "Clé de jointure entre les modèles (qui apprennent sur ces identifiants) et le référentiel Crumble-AI, dont chaque ING porte un off_tag : 78 des 150 ingrédients du vocabulaire s'alignent ainsi exactement."
+    "projet": "Clé de jointure entre les modèles (qui apprennent sur ces identifiants) et le référentiel de Mon PLM, dont chaque ING porte un off_tag : 78 des 150 ingrédients du vocabulaire s'alignent ainsi exactement."
    },
    {
     "terme": "percent / percent_estimate",
@@ -560,7 +560,7 @@
    {
     "terme": "Contrainte",
     "definition": "Condition que la solution doit respecter (égalité ou inégalité) : somme = 100, ordre décroissant, quantité ≥ 0, sans huile de palme.",
-    "projet": "Bornes, projection, problème inverse, optimisation Crumble-AI."
+    "projet": "Bornes, projection, problème inverse, optimisation de Mon PLM."
    },
    {
     "terme": "Programmation linéaire (LP)",
@@ -594,7 +594,7 @@
    },
    {
     "terme": "Problème inverse",
-    "definition": "Retrouver les causes (recette) à partir des effets observés (étiquette, nutrition) — l'inverse du calcul direct que fait le moteur de Crumble-AI.",
+    "definition": "Retrouver les causes (recette) à partir des effets observés (étiquette, nutrition) — l'inverse du calcul direct que fait le moteur de Mon PLM.",
     "projet": "Étape 3 : choisir des articles et leurs quantités pour que la composition aplatie reproduise la prédiction."
    },
    {
@@ -613,9 +613,9 @@
     "projet": "Mode rétro-ingénierie."
    },
    {
-    "terme": "Solveur du projet vs moteur Crumble-AI",
-    "definition": "Le solveur du projet (src/crumble.py, fonction resoudre) répond à « avec quelles MP et en quelle quantité ? » : programme quadratique convexe sur le référentiel, guidé par la prédiction apprise et le cahier des charges ; il produit un prototype et un verdict. Le moteur Crumble-AI (déjà opérationnel) recalcule ensuite nutrition, allergènes, étiquette INCO, Nutri-Score et coût sur la recette chargée, et optimise les quantités selon les règles de l'entreprise : son calcul fait foi.",
-    "projet": "Étape 3 = solveur du projet ; étape 4 = moteur Crumble-AI. Le recouvrement (contraintes Nutri-Score dans le solveur) est voulu : le choix des MP et le Nutri-Score ne sont pas séparables."
+    "terme": "Solveur du projet vs moteur de Mon PLM",
+    "definition": "Le solveur du projet (src/crumble.py, fonction resoudre) répond à « avec quelles MP et en quelle quantité ? » : programme quadratique convexe sur le référentiel, guidé par la prédiction apprise et le cahier des charges ; il produit un prototype et un verdict. Le moteur de Mon PLM (déjà opérationnel) recalcule ensuite nutrition, allergènes, étiquette INCO, Nutri-Score et coût sur la recette chargée, et optimise les quantités selon les règles de l'entreprise : son calcul fait foi.",
+    "projet": "Étape 3 = solveur du projet ; étape 4 = moteur de Mon PLM. Le recouvrement (contraintes Nutri-Score dans le solveur) est voulu : le choix des MP et le Nutri-Score ne sont pas séparables."
    },
    {
     "terme": "Classe de composition / MP interchangeables",
@@ -634,7 +634,7 @@
    },
    {
     "terme": "Plafonds techniques",
-    "definition": "Bornes par catégorie de MP et classe de composition (additifs ≤ 1,5 %, arômes ≤ 1 %) en attendant les doses maximales réglementaires (règlement 1333/2008) embarquées dans Crumble-AI.",
+    "definition": "Bornes par catégorie de MP et classe de composition (additifs ≤ 1,5 %, arômes ≤ 1 %) en attendant les doses maximales réglementaires (règlement 1333/2008) embarquées dans Mon PLM.",
     "projet": "Contraintes du solveur (étape 3)."
    },
    {
@@ -655,17 +655,17 @@
    {
     "terme": "Bout en bout",
     "definition": "Évaluation de la chaîne complète depuis le nom du produit : modèle 1 → règle QUID → modèle 2a → 2b → bilan d'eau → alignement → solveur, contre la recette réelle.",
-    "projet": "50 produits Crumble-AI : précision / rappel des MP ≈ 0,5, lettre Nutri-Score identique 70 %."
+    "projet": "50 produits de Mon PLM : précision / rappel des MP ≈ 0,5, lettre Nutri-Score identique 70 %."
    },
    {
     "terme": "Payload de chargement",
-    "definition": "Fichier JSON au format attendu par le job de chargement de dev.crumble-ai.com : recette (recette en kg de lot, perte en eau par composant) + produit fini, avec les références dev des MP.",
-    "projet": "Export des formulations proposées (REC-91001…) : Crumble-AI recalcule et fait foi."
+    "definition": "Fichier JSON au format attendu par le chargement dans Mon PLM : recette (recette en kg de lot, perte en eau par composant) + produit fini, avec les références dev des MP.",
+    "projet": "Export des formulations proposées (REC-91001…) : Mon PLM recalcule et fait foi."
    },
    {
     "terme": "Optimisation multicritère",
     "definition": "Arbitrer plusieurs objectifs (coût, Nutri-Score, écart à la prédiction) et contraintes (obligatoires) ; les critères pondérés du cahier des charges entrent dans la fonction objectif.",
-    "projet": "Étape 4, moteur Crumble-AI."
+    "projet": "Étape 4, moteur de Mon PLM."
    }
   ]
  },
@@ -800,7 +800,7 @@
    {
     "terme": "Démonstrateur (Streamlit)",
     "definition": "Petite application web locale écrite en Python : on saisit une demande, on voit la liste, les contrôles et la formulation.",
-    "projet": "Écran 20 du site ; trois modèles au choix ; export vers Crumble-AI."
+    "projet": "Écran 20 du site ; trois modèles au choix ; export vers Mon PLM."
    }
   ]
  }

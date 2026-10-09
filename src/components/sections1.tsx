@@ -17,7 +17,7 @@ export function Accueil() {
         <h1 className="mt-2 max-w-4xl text-4xl font-bold text-navy sm:text-[2.6rem] sm:leading-tight [text-wrap:balance]">Assistant de formulation prédictive pour l&apos;alimentaire</h1>
         <p className="mt-2 max-w-4xl text-base text-ink-soft">
           Un LLM écrit la liste d&apos;ingrédients à partir du brief et du cahier des charges — d&apos;un petit modèle fine-tuné à un modèle
-          ouvert de 9 milliards de paramètres en RAG, comparé à ChatGPT ; une optimisation la traduit en recette de matières premières dans Crumble-AI.
+          ouvert de 9 milliards de paramètres en RAG, comparé à ChatGPT ; une optimisation la traduit en recette de matières premières dans Mon PLM.
         </p>
         <h2 className="mt-4 text-xl font-bold text-navy">Le problème métier : formuler, c&apos;est arbitrer sous contraintes</h2>
         <div className="mt-3 grid gap-3 md:grid-cols-3">
@@ -25,7 +25,7 @@ export function Accueil() {
           <Carte num="2" titre="Des contraintes nombreuses">Coût de recette, Nutri-Score, allergènes, allégations (vegan, bio, halal), huile de palme, additifs, doses maximales.</Carte>
           <Carte num="3" titre="Le marché, base d'apprentissage">Chaque étiquette du commerce est une formulation réelle : liste d&apos;ingrédients ordonnée, pourcentages déclarés, nutrition, allégations.</Carte>
         </div>
-        {/* Ordre de grandeur (référentiel Crumble-AI : 10 MP par recette en médiane) : ~16 MP équivalentes par catégorie en moyenne
+        {/* Ordre de grandeur (référentiel de Mon PLM : 10 MP par recette en médiane) : ~16 MP équivalentes par catégorie en moyenne
             sur les recettes → 16^10 ≈ 1,1·10^12 ; doser 10 MP au % près = compositions de 100 en 10 parts = C(99,9) ≈ 1,7·10^12 ;
             produit ≈ 2·10^24. */}
         <div className="mt-3 rounded-2xl border border-line bg-paper px-4 py-3">
@@ -89,7 +89,7 @@ export function Chaine() {
     ["2", "Contrôler", "Règles INCO : ordre, somme, QUID ; vérification du cahier des charges", "% décroissants ✓ · somme ≤ 105 ✓ · vegan ✓ : ni beurre, ni œufs, ni lait"],
     ["3", "Bilan d'eau", "Étiquette (100 g fini) → pâte : la matière sèche est conservée", "eau ajoutée 10 % de la pâte · rendement de cuisson 90 %"],
     ["4", "Matières premières", "Solveur du projet : programme quadratique, MP vegan seulement", "Farine T55 23,1 % · colza 15,1 % · sucre 15,1 % · pépites 50 % 11,2 % · isolat de pois 10,3 %…"],
-    ["5", "Calculer", "Moteur Crumble-AI : nutrition, coût, Nutri-Score, étiquette — son calcul fait foi", "2,48 €/kg · Nutri-Score E (23) · allergènes : gluten, soja"],
+    ["5", "Calculer", "Moteur de Mon PLM : nutrition, coût, Nutri-Score, étiquette — son calcul fait foi", "2,48 €/kg · Nutri-Score E (23) · allergènes : gluten, soja"],
   ];
   return (
     <Ecran id="chaine" n="03" kicker="Architecture" titre="La chaîne complète : générer, contrôler, formuler, calculer">
@@ -115,17 +115,17 @@ export function Chaine() {
 
 export function Donnees() {
   return (
-    <Ecran id="donnees" n="04" kicker="Données" titre="Open Food Facts pour apprendre, Crumble-AI pour formuler">
+    <Ecran id="donnees" n="04" kicker="Données" titre="Open Food Facts pour apprendre, Mon PLM pour formuler">
       <div className="grid gap-4 md:grid-cols-3">
         <Carte titre="Open Food Facts" accent="blue"><Puces items={[
           "Dump Parquet 7,9 Go filtré avec DuckDB.",
           "49 838 produits, 1,16 M lignes d'ingrédients, ~90 000 QUID.",
           "Découpage par nom : 31 642 / 4 488 / 9 603 (apprentissage / validation / test), aucun nom du test vu à l'apprentissage.",
         ]} /></Carte>
-        <Carte titre="Crumble-AI (référentiel)" accent="amber"><Puces items={[
+        <Carte titre="Mon PLM (référentiel)" accent="amber"><Puces items={[
           "281 MP génériques dont 48 composites, 191 ingrédients alignés sur OFF.",
           "Composition, nutrition, humidité, coût, allergènes, certifications.",
-          "50 produits finis avec recette, étiquette, Nutri-Score ; chargé dans dev.crumble-ai.com.",
+          "50 produits finis avec recette, étiquette, Nutri-Score ; chargé dans Mon PLM.",
         ]} /></Carte>
         <Carte titre="CIQUAL 2020 (ANSES)" accent="ok"><Puces items={[
           "Nutrition et teneur en eau de 3 186 aliments.",

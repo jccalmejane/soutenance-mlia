@@ -73,7 +73,7 @@ export default function Demonstrateur() {
         <p className="text-xs font-bold tracking-widest text-amber-bright uppercase">Démonstrateur local</p>
         <p className="max-w-2xl text-white/80">
           Le démonstrateur tourne sur le PC du présentateur, sans internet : Qwen2.5-0.5B + LoRA sur le processeur, réponses du
-          Qwen3.5-9B rejouées, vérificateurs, solveur et export Crumble-AI. Aucune recette n&apos;est envoyée en ligne ; il est
+          Qwen3.5-9B rejouées, vérificateurs, solveur et export vers Mon PLM. Aucune recette n&apos;est envoyée en ligne ; il est
           montré en direct pendant la soutenance.
         </p>
       </div>
@@ -88,7 +88,7 @@ export default function Demonstrateur() {
       {etat === "absent" && (
         <>
           <p className="max-w-2xl text-white/80">
-            Il est lancé avec le site (Qwen2.5-0.5B + LoRA sur le processeur, solveur, export Crumble-AI) et met une dizaine de
+            Il est lancé avec le site (Qwen2.5-0.5B + LoRA sur le processeur, solveur, export vers Mon PLM) et met une dizaine de
             secondes à démarrer : cette page se reconnecte toute seule. Si rien ne vient, relancer <b className="text-white">Lancer la soutenance.bat</b>, puis :
           </p>
           <button onClick={verifier} className="rounded-full bg-gradient-to-r from-amber-bright to-amber px-5 py-2 font-semibold text-navy-deep hover:brightness-105">
