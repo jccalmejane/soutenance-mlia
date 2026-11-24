@@ -12,12 +12,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="fr" className="h-full antialiased">
       <body className="min-h-full">
-        {/* Fond plein écran fixe (macarons), comme sur crumble-ai.com : version locale seulement ; en ligne, fond crème uni. */}
-        {process.env.VERSION_LOCALE === "1" && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src="/img/LightBackground.webp" alt="" aria-hidden="true" className="pointer-events-none fixed select-none"
-            style={{ top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", zIndex: -1 }} />
-        )}
+        {/* Fond crème uni (body, globals.css) : l'image des macarons a été retirée (public/img/LightBackground.webp conservée). */}
         {children}
       </body>
     </html>
